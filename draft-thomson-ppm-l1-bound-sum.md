@@ -3,7 +3,7 @@ title: "A Prio Instantiation for Vector Sums with an L1 Norm Bound on Contributi
 abbrev: "Prio L1 Bound Sum"
 category: std
 
-docname: draft-ppm-thomson-l1-bound-sum-latest
+docname: draft-thomson-ppm-l1-bound-sum-latest
 submissiontype: IETF
 number:
 date:
