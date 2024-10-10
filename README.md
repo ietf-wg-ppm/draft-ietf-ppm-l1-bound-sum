@@ -2,10 +2,10 @@
 
 This is the working area for the individual Internet-Draft, "A Prio Instantiation for Vector Sums with an L1 Norm Bound on Contributions".
 
-* [Editor's Copy](https://martinthomson.github.io/prio-l1-bound-sum/#go.draft-ppm-thomson-l1-bound-sum.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-ppm-thomson-l1-bound-sum)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-ppm-thomson-l1-bound-sum)
-* [Compare Editor's Copy to Individual Draft](https://martinthomson.github.io/prio-l1-bound-sum/#go.draft-ppm-thomson-l1-bound-sum.diff)
+* [Editor's Copy](https://martinthomson.github.io/prio-l1-bound-sum/#go.draft-thomson-ppm-l1-bound-sum.html)
+* [Datatracker Page](https://datatracker.ietf.org/doc/draft-thomson-ppm-l1-bound-sum)
+* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-thomson-ppm-l1-bound-sum)
+* [Compare Editor's Copy to Individual Draft](https://martinthomson.github.io/prio-l1-bound-sum/#go.draft-thomson-ppm-l1-bound-sum.diff)
 
 
 ## Contributing
