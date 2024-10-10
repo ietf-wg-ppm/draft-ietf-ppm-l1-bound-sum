@@ -9,19 +9,19 @@ number:
 date:
 consensus: true
 v: 3
-area: AREA
-workgroup: WG Working Group
+# area: AREA
+# workgroup: WG Working Group
 keyword:
  - vectors
  - manhattan
  - multi-dimensional
 venue:
-  group: WG
-  type: Working Group
-  mail: WG@example.com
-  arch: https://example.com/WG
-  github: USER/REPO
-  latest: https://example.com/LATEST
+#  group: WG
+#  type: Working Group
+#  mail: WG@example.com
+#  arch: https://example.com/WG
+  github: "martinthomson/prio-l1-bound-sum"
+  latest: "https://martinthomson.github.io/prio-l1-bound-sum/draft-ppm-thomson-l1-bound-sum.html"
 
 author:
  -
