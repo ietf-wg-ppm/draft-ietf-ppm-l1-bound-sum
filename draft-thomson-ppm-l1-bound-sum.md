@@ -9,19 +9,19 @@ number:
 date:
 consensus: true
 v: 3
-# area: AREA
-# workgroup: WG Working Group
+area: "Security"
+workgroup: "Privacy Preserving Measurement"
 keyword:
  - vectors
  - manhattan
  - multi-dimensional
 venue:
-#  group: WG
-#  type: Working Group
-#  mail: WG@example.com
-#  arch: https://example.com/WG
+  group: "Privacy Preserving Measurement"
+  type: "Working Group"
+  mail: "ppm@ietf.org"
+  arch: "https://mailarchive.ietf.org/arch/browse/ppm/"
   github: "martinthomson/prio-l1-bound-sum"
-  latest: "https://martinthomson.github.io/prio-l1-bound-sum/draft-ppm-thomson-l1-bound-sum.html"
+  latest: "https://martinthomson.github.io/prio-l1-bound-sum/draft-thomson-ppm-l1-bound-sum.html"
 
 author:
  -
