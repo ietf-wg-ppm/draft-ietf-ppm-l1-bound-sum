@@ -19,12 +19,12 @@
 # Change the file extension to match the format (.xml for XML, etc...)
 #
 ###
-title: "TODO - Your title"
-abbrev: "TODO - Abbreviation"
-category: info
+title: "A Prio Instantiation for Vector Sums with an L1 Norm Bound on Contributions"
+abbrev: "Prio L1 Bound Sum"
+category: std
 
-docname: draft-todo-yourname-protocol-latest
-submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
+docname: draft-ppm-thomson-l1-bound-sum-latest
+submissiontype: IETF
 number:
 date:
 consensus: true
@@ -32,9 +32,9 @@ v: 3
 area: AREA
 workgroup: WG Working Group
 keyword:
- - next generation
- - unicorn
- - sparkling distributed ledger
+ - vectors
+ - manhattan
+ - multi-dimensional
 venue:
   group: WG
   type: Working Group
@@ -46,7 +46,7 @@ venue:
 author:
  -
     fullname: Your Name Here
-    organization: Your Organization Here
+    organization: Mozilla
     email: your.email@example.com
 
 normative:
