@@ -111,50 +111,125 @@ The difference is that Prio3L1BoundSum involves validation of
 which might increase the most efficient value for chunk_length.
 
 
-## Encoding and Decoding
-
-The encode, truncate, and decode functions for Prio3L1BoundSum is identical to that of Prio3SumVec;
-see {{Section 7.4.3 of VDAF}} for those definitions.
-
-
 ## Validity Circuit
 
-The validity circuit for Prio3L1BoundSum uses a modified version of the Prio3SumVec validity circuit.
-The values from the measurement are extended to include their sum,
-so that the sum is checked in the same way as each vector component.
+The validity circuit for Prio3L1BoundSum uses a modified version of the
+Prio3SumVec validity circuit, see {{Section 7.4.3 of VDAF}}.
+
+The values from the measurement are extended to include their sum, so that the
+sum is checked in the same way as each vector component. The encoded measurement
+has a total length of `(length + 1) * bits`. The field elements in the encoded
+vector represent all the bits of the measurement vector's elements, followed by
+the bits of the L1 norm of the vector.
+
+The validity circuit checks that the encoded measurement consists of ones and
+zeros, and that the encoded L1 norm is consistent with the encoded vector
+elements. The first checks, that all field elements are ones and zeros, are done
+in the same manner as in the `SumVec` circuit. The L1 norm is checked by
+decoding the reported L1 norm, decoding the measurement vector, recomputing the
+L1 norm, and subtracting to confirm they are identical.
+
+The complete circuit is specified below.
 
 ~~~ python
-def eval(
-        self,
-        meas: list[F],
-        joint_rand: list[F],
-        num_shares: int) -> list[F]:
-    weight = 0
-    for i in range(self.length):
-        weight += self.field.decode_from_bit_vector(
-            meas[i * self.bits : (i + 1) * self.bits]
+class L1BoundSum(Valid[lits[int], list[int], F]):
+    EVAL_OUTPUT_LEN = 2
+    length: int
+    bits: int
+    chunk_length: int
+    field: type[F]
+
+    def __init__(self,
+                 field: type[F],
+                 length: int,
+                 bits: int,
+                 chunk_length: int):
+        """
+        Instantiate the `L1BoundSum` circuit for measurements with
+        `length` elements, each in the range `[0, 2^bits)`, and with
+        a maximum L1 norm of `2^bits - 1`.
+        """
+        self.field = field
+        self.length = length
+        self.bits = bits
+        self.chunk_length = chunk_length
+        self.GADGETS = [ParallelSum(Mul(), chunk_length)]
+        self.GADGET_CALLS = [
+            ((length + 1) * bits + chunk_length - 1) // chunk_length
+        ]
+        self.MEAS_LEN = (length + 1) * bits
+        self.OUTPUT_LEN = length
+        self.JOINT_RAND_LEN = self.GADGET_CALLS[0]
+
+    def eval(
+            self,
+            meas: list[F],
+            joint_rand: list[F],
+            num_shares: int) -> list[F]:
+        range_check = field(0)
+        shares_inv = self.field(num_shares).inv()
+        for i in range(self.GADGET_CALLS[0]):
+            r = joint_rand[i]
+            r_power = r
+            inputs: list[Optional[F]]
+            inputs = [None] * (2 * self.chunk_length)
+            for j in range(self.chunk_length):
+                index = i * self.chunk_length + j
+                if index < len(meas):
+                    meas_elem = meas[index]
+                else:
+                    meas_elem = self.field(0)
+
+                inputs[j * 2] = r_power * meas_elem
+                inputs[j * 2 + 1] = meas_elem - shares_inv
+
+                r_power *= r
+
+            range_check += self.GADGETS[0].eval(
+                self.field,
+                cast(list[F], inputs),
+            )
+
+        observed_weight = field(0)
+        for i in range(self.length):
+            observed_weight += self.field.decode_from_bit_vector(
+                meas[i * self.bits : (i + 1) * self.bits]
+            )
+        weight_position = self.length * self.bits
+        claimed_weight = self.field.decode_from_bit_vector(
+            meas[weight_position : weight_position + self.bits]
         )
-    weight_bits = self.field.encode_into_bit_vector(weight)
+        weight_check = observed_weight - claimed_weight
 
-    sum_vec = SumVec(self.field, self.length + 1,
-                     self.bits, chunk_length)
-    return sum_vec.eval(meas + weight_bits, joint_rand, num_shares)
+        return [range_check, weight_check]
+
+    def encode(self, measurement: list[int]) -> list[F]:
+        encoded = []
+        for val in measurement:
+            encoded += self.field.encode_into_bit_vector(
+                val,
+                self.bits,
+            )
+        encoded += self.field.encode_into_bit_vector(
+            sum(measurement),
+            self.bits,
+        )
+        return encoded
+
+    def truncate(self, meas: list[F]) -> list[F]:
+        truncated = []
+        for i in range(self.length):
+            truncated.append(self.field.decode_from_bit_vector(
+                meas[i * self.bits: (i + 1) * self.bits]
+            ))
+        return truncated
+
+    def decode(
+            self,
+            output: list[F],
+            _num_measurements) -> list[int]:
+        return [x.as_unsigned() for x in output]
 ~~~
-
-Key characteristics of the validity circuit
-are summarized in {{table-prio3l1boundsum-validity}}.
-
-| Parameter | Value |
-|:-|:-|
-| GADGETS | \[ParallelSum(Mul(), chunk_length)] |
-| GADGET_CALLS | \[ceil((length + 1) * bits / chunk_length)] |
-| MEAS_LEN | length * bits |
-| OUTPUT_LEN | length |
-| JOINT_RAND_LEN | GADGET_CALLS\[0] |
-| EVAL_OUTPUT_LEN | 1 |
-| Measurement | list\[int], each element in range(2**bits) |
-| AggResult | list\[int] |
-{: #table-prio3l1boundsum-validity title="Prio3L1BoundSum Validity Circuit Characteristics"}
 
 
 # Security Considerations
