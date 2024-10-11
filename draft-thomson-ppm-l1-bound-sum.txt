@@ -4,8 +4,8 @@
 
 Privacy Preserving Measurement                                M. Thomson
 Internet-Draft                                                   Mozilla
-Intended status: Standards Track                         10 October 2024
-Expires: 13 April 2025
+Intended status: Standards Track                         11 October 2024
+Expires: 14 April 2025
 
 
      A Prio Instantiation for Vector Sums with an L1 Norm Bound on
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 April 2025.
+   This Internet-Draft will expire on 14 April 2025.
 
 Copyright Notice
 
@@ -71,9 +71,14 @@ Table of Contents
    1.  Introduction
    2.  Conventions and Definitions
    3.  Prio3L1BoundSum Definition
+     3.1.  Chunk Length Choice
+     3.2.  Encoding and Decoding
+     3.3.  Validity Circuit
    4.  Security Considerations
    5.  IANA Considerations
-   6.  Normative References
+   6.  References
+     6.1.  Normative References
+     6.2.  Informative References
    Acknowledgments
    Author's Address
 
@@ -94,8 +99,10 @@ Table of Contents
    some maximum.
 
    This document defines the Prio3L1BoundSum instantiation.  Unlike
-   Prio3Histogram (Section 7.4.4 of [VDAF]), a valid measurement can
-   have an L1 norm equal to any value between 0 and the chosen limit.
+   Prio3Histogram (Section 7.4.4 of [VDAF]), in which measurements need
+   to have an L1 norm of exactly 1, a valid measurement for
+   Prio3L1BoundSum can have an L1 norm equal to any value between 0 and
+   the chosen limit.
 
    This instantiation limits the L1 norm of a vector or histogram to a
    value that is one less than a chosen power of 2, or 2^n-1.  This
@@ -118,15 +125,117 @@ Table of Contents
 
 3.  Prio3L1BoundSum Definition
 
+   The Prio3L1BoundSum instantiation of Prio [PRIO] supports the
+   addition of a vector of integers.  The instantiation is summarized in
+   Table 1.
+
+     +===========+==================================================+
+     | Parameter | Value                                            |
+     +===========+==================================================+
+     | Valid     | L1BoundSum(Field128, length, bits, chunk_length) |
+     +-----------+--------------------------------------------------+
+     | Field     | Field128 (Section 6.1.2 of [VDAF])               |
+     +-----------+--------------------------------------------------+
+     | PROOFS    | 1                                                |
+     +-----------+--------------------------------------------------+
+     | XOF       | XofTurboShake128 (Section 6.2.1 of [VDAF])       |
+     +-----------+--------------------------------------------------+
+
+                   Table 1: Prio3L1BoundSum Parameters
+
+   The function takes three parameters: length, bits, and chunk_length.
+   The vector contains "length" components, each of which is a non-
+   negative integer less than 2^bits.
+
+3.1.  Chunk Length Choice
+
+   The chunk_length parameter can be chosen in approximately the same
+   way as for Prio3SumVec, as detailed in Section 7.4.3.1 of [VDAF].
+   The difference is that Prio3L1BoundSum involves validation of bits *
+   (length + 1) values, which might increase the most efficient value
+   for chunk_length.
+
+3.2.  Encoding and Decoding
+
+   The encode, truncate, and decode functions for Prio3L1BoundSum is
+   identical to that of Prio3SumVec; see Section 7.4.3 of [VDAF] for
+   those definitions.
+
+3.3.  Validity Circuit
+
+   The validity circuit for Prio3L1BoundSum uses a modified version of
+   the Prio3SumVec validity circuit.  The values from the measurement
+   are extended to include their sum, so that the sum is checked in the
+   same way as each vector component.
+
+   def eval(
+           self,
+           meas: list[F],
+           joint_rand: list[F],
+           num_shares: int) -> list[F]:
+       weight = 0
+       for i in range(self.length):
+           weight += self.field.decode_from_bit_vector(
+               meas[i * self.bits : (i + 1) * self.bits]
+           )
+       weight_bits = self.field.encode_into_bit_vector(weight)
+
+       sum_vec = SumVec(self.field, self.length + 1,
+                        self.bits, chunk_length)
+       return sum_vec.eval(meas + weight_bits, joint_rand, num_shares)
+
+   Key characteristics of the validity circuit are summarized in
+   Table 2.
+
+     +=================+=============================================+
+     | Parameter       | Value                                       |
+     +=================+=============================================+
+     | GADGETS         | [ParallelSum(Mul(), chunk_length)]          |
+     +-----------------+---------------------------------------------+
+     | GADGET_CALLS    | [ceil((length + 1) * bits) / chunk_length)] |
+     +-----------------+---------------------------------------------+
+     | MEAS_LEN        | length * bits                               |
+     +-----------------+---------------------------------------------+
+     | OUTPUT_LEN      | length                                      |
+     +-----------------+---------------------------------------------+
+     | JOINT_RAND_LEN  | GADGET_CALLS[0]                             |
+     +-----------------+---------------------------------------------+
+     | EVAL_OUTPUT_LEN | 1                                           |
+     +-----------------+---------------------------------------------+
+     | Measurement     | list[int], each element in range(2**bits)   |
+     +-----------------+---------------------------------------------+
+     | AggResult       | list[int]                                   |
+     +-----------------+---------------------------------------------+
+
+         Table 2: Prio3L1BoundSum Validity Circuit Characteristics
+
 4.  Security Considerations
 
-   TODO Security
+   The Prio3L1BoundSum VDAF is subject to the same considerations as
+   other Prio-based VDAFs.  These considerations are detailed in
+   Section 9 of [VDAF].
+
+   In particular, this instantiation uses Field128 to ensure robustness
+   despite the use of joint randomness in proofs.  Joint randomness
+   increases the risk of an attacker finding a combination of invalid
+   inputs that passes validation.  A larger field increases the
+   computational cost of finding such a combination.
 
 5.  IANA Considerations
 
-   This document has no IANA actions.
+   This document registers a codepoint for Prio3L1BoundSum in the
+   "Verifiable Distributed Aggregation Functions (VDAF)" registry as
+   defined by Section 10 of [VDAF].  This entry contains the following
+   fields:
 
-6.  Normative References
+   Value:  0xTBD Scheme:
+      Prio3L1BoundSum Type:
+      VDAF Reference:
+      RFCXXXX (this document)
+
+6.  References
+
+6.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -142,6 +251,14 @@ Table of Contents
               Progress, Internet-Draft, draft-irtf-cfrg-vdaf-12, 4
               October 2024, <https://datatracker.ietf.org/doc/html/
               draft-irtf-cfrg-vdaf-12>.
+
+6.2.  Informative References
+
+   [PRIO]     Corrigan-Gibbs, H. and D. Boneh, "Prio: private, robust,
+              and scalable computation of aggregate statistics", USENIX
+              Association, Proceedings of the 14th USENIX Conference on
+              Networked Systems Design and Implementation pp. 259–282,
+              ISBN 9781931971379, March 2017.
 
 Acknowledgments
 
