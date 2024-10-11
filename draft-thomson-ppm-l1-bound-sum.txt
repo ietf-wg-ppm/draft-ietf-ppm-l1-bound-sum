@@ -228,10 +228,10 @@ Table of Contents
    defined by Section 10 of [VDAF].  This entry contains the following
    fields:
 
-   Value:  0xTBD Scheme:
-      Prio3L1BoundSum Type:
-      VDAF Reference:
-      RFCXXXX (this document)
+   Value:  0xTBD
+   Scheme:  Prio3L1BoundSum
+   Type:  VDAF
+   Reference:  RFCXXXX (this document)
 
 6.  References
 
