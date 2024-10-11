@@ -84,6 +84,78 @@ This document uses the terminology and functions defined in {{Section 2 of VDAF}
 
 # Prio3L1BoundSum Definition {#def}
 
+The Prio3L1BoundSum instantiation of Prio {{?PRIO=DOI.10.5555/3154630.3154652}}
+supports the addition of a vector of integers.
+The instantiation is summarized in {{table-l1-bound-sum}}.
+
+| Parameter | Value |
+|:-|:-|
+| Valid | L1BoundSum(Field128, length, bits, chunk_length) |
+| Field | Field128 ({{Section 6.1.2 of VDAF}}) |
+| PROOFS | 1 |
+| XOF | XofTurboShake128 ({{Section 6.2.1 of VDAF}}) |
+{: #table-l1-bound-sum title="Prio3L1BoundSum Parameters"}
+
+The function takes three parameters:
+length, bits, and chunk_length.
+The vector contains "length" components,
+each of which is a non-negative integer less than 2<sup>bits</sup>.
+
+## Chunk Length Choice
+
+The chunk_length parameter can be chosen
+in approximately the same way as for Prio3SumVec,
+as detailed in {{Section 7.4.3.1 of VDAF}}.
+The difference is that Prio3L1BoundSum involves validation of
+`bits * (length + 1)` values,
+which might increase the most efficient value for chunk_length.
+
+
+## Encoding and Decoding
+
+The encode, truncate, and decode functions for Prio3L1BoundSum is identical to that of Prio3SumVec;
+see {{Section 7.4.3 of VDAF}} for those definitions.
+
+
+## Validity Circuit
+
+The validity circuit for Prio3L1BoundSum uses a modified version of the Prio3SumVec validity circuit.
+The values from the measurement are extended to include their sum,
+so that the sum is checked in the same way as each vector component.
+
+~~~ python
+def eval(
+        self,
+        meas: list[F],
+        joint_rand: list[F],
+        num_shares: int) -> list[F]:
+    weight = 0
+    for i in range(self.length):
+        weight += self.field.decode_from_bit_vector(
+            meas[i * self.bits : (i + 1) * self.bits]
+        )
+    weight_bits = self.field.encode_into_bit_vector(weight)
+
+    sum_vec = SumVec(self.field, self.length + 1,
+                     self.bits, chunk_length)
+    return sum_vec.eval(meas + weight_bits, joint_rand, num_shares)
+~~~
+
+Key characteristics of the validity circuit
+are summarized in {{table-prio3l1boundsum-validity}}.
+
+| Parameter | Value |
+|:-|:-|
+| GADGETS | \[ParallelSum(Mul(), chunk_length)] |
+| GADGET_CALLS | \[ceil((length + 1) * bits) / chunk_length)] |
+| MEAS_LEN | length * bits |
+| OUTPUT_LEN | length |
+| JOINT_RAND_LEN | GADGET_CALLS\[0] |
+| EVAL_OUTPUT_LEN | 1 |
+| Measurement | list\[int], each element in range(2**bits) |
+| AggResult | list\[int] |
+{: #table-prio3l1boundsum-validity title="Prio3L1BoundSum Validity Circuit Characteristics"}
+
 
 # Security Considerations
 
@@ -92,7 +164,20 @@ TODO Security
 
 # IANA Considerations
 
-This document has no IANA actions.
+This document registers a codepoint for Prio3L1BoundSum
+in the "Verifiable Distributed Aggregation Functions (VDAF)" registry
+as defined by {{Section 10 of VDAF}}.
+This entry contains the following fields:
+
+Value:
+: 0xTBD
+Scheme:
+: Prio3L1BoundSum
+Type:
+: VDAF
+Reference:
+: RFCXXXX (this document)
+{: spacing="compact"}
 
 
 --- back
