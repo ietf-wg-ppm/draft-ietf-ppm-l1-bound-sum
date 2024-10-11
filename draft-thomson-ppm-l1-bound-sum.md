@@ -179,10 +179,13 @@ This entry contains the following fields:
 
 Value:
 : 0xTBD
+
 Scheme:
 : Prio3L1BoundSum
+
 Type:
 : VDAF
+
 Reference:
 : RFCXXXX (this document)
 {: spacing="compact"}
