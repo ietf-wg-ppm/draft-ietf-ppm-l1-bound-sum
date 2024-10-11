@@ -147,7 +147,7 @@ are summarized in {{table-prio3l1boundsum-validity}}.
 | Parameter | Value |
 |:-|:-|
 | GADGETS | \[ParallelSum(Mul(), chunk_length)] |
-| GADGET_CALLS | \[ceil((length + 1) * bits) / chunk_length)] |
+| GADGET_CALLS | \[ceil((length + 1) * bits / chunk_length)] |
 | MEAS_LEN | length * bits |
 | OUTPUT_LEN | length |
 | JOINT_RAND_LEN | GADGET_CALLS\[0] |
