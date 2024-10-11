@@ -61,7 +61,8 @@ An L1 bound limits that sum to some maximum.
 
 This document defines the Prio3L1BoundSum instantiation.
 Unlike Prio3Histogram ({{Section 7.4.4 of VDAF}}),
-a valid measurement can have an L1 norm equal to any value
+in which measurements need to have an L1 norm of exactly 1,
+a valid measurement for Prio3L1BoundSum can have an L1 norm equal to any value
 between 0 and the chosen limit.
 
 This instantiation limits the L1 norm of a vector or histogram
@@ -72,6 +73,7 @@ relative to a more flexible limit.
 
 {{def}} defines the encoding of measurements for this instantiation
 and how the validation function is evaluated.
+
 
 # Conventions and Definitions
 
