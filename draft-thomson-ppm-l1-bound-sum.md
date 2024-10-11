@@ -132,7 +132,7 @@ L1 norm, and subtracting to confirm they are identical.
 The complete circuit is specified below.
 
 ~~~ python
-class L1BoundSum(Valid[lits[int], list[int], F]):
+class L1BoundSum(Valid[list[int], list[int], F]):
     EVAL_OUTPUT_LEN = 2
     length: int
     bits: int
@@ -166,7 +166,7 @@ class L1BoundSum(Valid[lits[int], list[int], F]):
             meas: list[F],
             joint_rand: list[F],
             num_shares: int) -> list[F]:
-        range_check = field(0)
+        range_check = self.field(0)
         shares_inv = self.field(num_shares).inv()
         for i in range(self.GADGET_CALLS[0]):
             r = joint_rand[i]
@@ -190,14 +190,14 @@ class L1BoundSum(Valid[lits[int], list[int], F]):
                 cast(list[F], inputs),
             )
 
-        observed_weight = field(0)
+        observed_weight = self.field(0)
         for i in range(self.length):
             observed_weight += self.field.decode_from_bit_vector(
-                meas[i * self.bits : (i + 1) * self.bits]
+                meas[i * self.bits:(i + 1) * self.bits]
             )
         weight_position = self.length * self.bits
         claimed_weight = self.field.decode_from_bit_vector(
-            meas[weight_position : weight_position + self.bits]
+            meas[weight_position:weight_position + self.bits]
         )
         weight_check = observed_weight - claimed_weight
 
