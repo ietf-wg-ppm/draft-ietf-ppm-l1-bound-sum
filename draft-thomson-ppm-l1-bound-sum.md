@@ -159,7 +159,15 @@ are summarized in {{table-prio3l1boundsum-validity}}.
 
 # Security Considerations
 
-TODO Security
+The Prio3L1BoundSum VDAF is subject to the same considerations as other Prio-based VDAFs.
+These considerations are detailed in {{Section 9 of VDAF}}.
+
+In particular, this instantiation uses Field128 to ensure robustness
+despite the use of joint randomness in proofs.
+Joint randomness increases the risk of an attacker finding
+a combination of invalid inputs that passes validation.
+A larger field increases the computational cost
+of finding such a combination.
 
 
 # IANA Considerations
