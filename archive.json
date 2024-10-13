@@ -1,0 +1,140 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2024-10-13T01:51:51.754923+00:00",
+  "repo": "martinthomson/prio-l1-bound-sum",
+  "labels": [
+    {
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    },
+    {
+      "name": "documentation",
+      "description": "Improvements or additions to documentation",
+      "color": "0075ca"
+    },
+    {
+      "name": "duplicate",
+      "description": "This issue or pull request already exists",
+      "color": "cfd3d7"
+    },
+    {
+      "name": "enhancement",
+      "description": "New feature or request",
+      "color": "a2eeef"
+    },
+    {
+      "name": "good first issue",
+      "description": "Good for newcomers",
+      "color": "7057ff"
+    },
+    {
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "008672"
+    },
+    {
+      "name": "invalid",
+      "description": "This doesn't seem right",
+      "color": "e4e669"
+    },
+    {
+      "name": "question",
+      "description": "Further information is requested",
+      "color": "d876e3"
+    },
+    {
+      "name": "wontfix",
+      "description": "This will not be worked on",
+      "color": "ffffff"
+    }
+  ],
+  "issues": [
+    {
+      "number": 1,
+      "id": "I_kwDOM-k-FM6Z3YEi",
+      "title": "Validity circuit is not arithmetic",
+      "url": "https://github.com/martinthomson/prio-l1-bound-sum/issues/1",
+      "state": "OPEN",
+      "author": "divergentdave",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "The `eval` function of the validity circuit needs to be arithmetic, so it can be evaluated with secret shares of measurements (using gadget polynomials for nonlinear parts). While `decode_from_bit_vector()` is arithmetic, since it just evaluates a linear combination using powers of two, `encode_into_bit_vector()` is not, since it does bitwise operations on the inputs. Instead, this circuit will need to explicitly specify its own `encode()`, `truncate()`, and `decode()` methods (forming an \"affine-aggregatable encoding\") and shift some of the non-arithmetic logic into `encode()`. My thinking is that the encoded measurement will consist of bit-vector-encoded numbers from the input vector, followed by one more bit-vector-encoded number that represents the vector weight that the client claims the measurement has. Then the validity circuit can do two things: a range check, that all encoded measurement field elements are 0 or 1, and a sum check, doing `decode_from_bit_vector()` to recover the measurement vector and the claimed weight, then subtracting them to confirm they are equal. We could return both of these checks out of the circuit, note that this would require setting `EVAL_OUTPUT_LEN = 2`. Implementing the validity checks this way is all arithmetic, (and only the range checks require nonlinear gadgets) so they're all possible to do on secret shares. Since the claimed vector weight gets encoded as a bit vector, and we check that each 'bit' is 0 or 1, the circuit will confirm that the vector weight is in [0, 2^bits).\r\n\r\nI can send a PR with these changes.",
+      "createdAt": "2024-10-11T13:48:13Z",
+      "updatedAt": "2024-10-11T13:48:13Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 2,
+      "id": "I_kwDOM-k-FM6Z3bbl",
+      "title": "Reference implementation and test vectors",
+      "url": "https://github.com/martinthomson/prio-l1-bound-sum/issues/2",
+      "state": "OPEN",
+      "author": "divergentdave",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "It would be helpful to have a reference implementation of this Prio3 variant, making use the same Python snippets that are in the spec. This would allow testing and production of test vectors. The [PINE VDAF](https://github.com/junyechen1996/draft-chen-cfrg-vdaf-pine) can serve as an example of how to install, import, and extend the VDAF reference implementation.\r\n\r\nI can help out with a PR implementing this.",
+      "createdAt": "2024-10-11T13:53:26Z",
+      "updatedAt": "2024-10-11T13:53:26Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
+  "pulls": [
+    {
+      "number": 3,
+      "id": "PR_kwDOM-k-FM5-Wofv",
+      "title": "Rewrite the description of L1BoundSum",
+      "url": "https://github.com/martinthomson/prio-l1-bound-sum/pull/3",
+      "state": "OPEN",
+      "author": "divergentdave",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "This closes #1. I also adopted an editorial change from the editor's copy of VDAF (coming soon to draft 13) to remove the parameter table and put initialization, `encode()`, `eval()`, `truncate()`, and `decode()` together in one sourcecode element.",
+      "createdAt": "2024-10-11T14:56:19Z",
+      "updatedAt": "2024-10-11T17:10:57Z",
+      "baseRepository": "martinthomson/prio-l1-bound-sum",
+      "baseRefName": "main",
+      "baseRefOid": "f0ad1e91607e83f36ce9a7c634a1a0fafea18e0b",
+      "headRepository": "divergentdave/prio-l1-bound-sum",
+      "headRefName": "david/reimplement-circuit",
+      "headRefOid": "f860042aa2877306abcbc804f74f4c5044d572c7",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 4,
+      "id": "PR_kwDOM-k-FM5-XdI-",
+      "title": "Add reference implementation",
+      "url": "https://github.com/martinthomson/prio-l1-bound-sum/pull/4",
+      "state": "OPEN",
+      "author": "divergentdave",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #2, stacked on PR #3.",
+      "createdAt": "2024-10-11T17:21:35Z",
+      "updatedAt": "2024-10-11T17:21:35Z",
+      "baseRepository": "martinthomson/prio-l1-bound-sum",
+      "baseRefName": "main",
+      "baseRefOid": "f0ad1e91607e83f36ce9a7c634a1a0fafea18e0b",
+      "headRepository": "divergentdave/prio-l1-bound-sum",
+      "headRefName": "david/poc",
+      "headRefOid": "f80cb2313c086f6a136cff85ec31f6cd1b561d43",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    }
+  ]
+}
