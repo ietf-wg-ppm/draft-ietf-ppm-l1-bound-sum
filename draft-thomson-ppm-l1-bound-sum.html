@@ -1031,7 +1031,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Thomson</td>
-<td class="center">Expires 14 April 2025</td>
+<td class="center">Expires 17 April 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1044,12 +1044,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-thomson-ppm-l1-bound-sum-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-10-11" class="published">11 October 2024</time>
+<time datetime="2024-10-14" class="published">14 October 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-04-14">14 April 2025</time></dd>
+<dd class="expires"><time datetime="2025-04-17">17 April 2025</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1100,7 +1100,7 @@ where the sum of the values in the contribution is less than a chosen value.<a h
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 14 April 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 17 April 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1142,10 +1142,7 @@ where the sum of the values in the contribution is less than a chosen value.<a h
                 <p id="section-toc.1-1.3.2.1.1" class="keepWithNext"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-chunk-length-choice" class="internal xref">Chunk Length Choice</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
-                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-encoding-and-decoding" class="internal xref">Encoding and Decoding</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
-                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-validity-circuit" class="internal xref">Validity Circuit</a></p>
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-validity-circuit" class="internal xref">Validity Circuit</a></p>
 </li>
             </ul>
 </li>
@@ -1277,91 +1274,125 @@ The difference is that Prio3L1BoundSum involves validation of
 which might increase the most efficient value for chunk_length.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="encoding-and-decoding">
-<section id="section-3.2">
-        <h3 id="name-encoding-and-decoding">
-<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-encoding-and-decoding" class="section-name selfRef">Encoding and Decoding</a>
-        </h3>
-<p id="section-3.2-1">The encode, truncate, and decode functions for Prio3L1BoundSum is identical to that of Prio3SumVec;
-see <span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-12#section-7.4.3" class="relref">Section 7.4.3</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span> for those definitions.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
-</section>
-</div>
 <div id="validity-circuit">
-<section id="section-3.3">
+<section id="section-3.2">
         <h3 id="name-validity-circuit">
-<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-validity-circuit" class="section-name selfRef">Validity Circuit</a>
+<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-validity-circuit" class="section-name selfRef">Validity Circuit</a>
         </h3>
-<p id="section-3.3-1">The validity circuit for Prio3L1BoundSum uses a modified version of the Prio3SumVec validity circuit.
-The values from the measurement are extended to include their sum,
-so that the sum is checked in the same way as each vector component.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
-<div class="lang-python sourcecode" id="section-3.3-2">
+<p id="section-3.2-1">The validity circuit for Prio3L1BoundSum uses a modified version of the
+Prio3SumVec validity circuit, see <span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-12#section-7.4.3" class="relref">Section 7.4.3</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2-2">The values from the measurement are extended to include their sum, so that the
+sum is checked in the same way as each vector component. The encoded measurement
+has a total length of <code>(length + 1) * bits</code>. The field elements in the encoded
+vector represent all the bits of the measurement vector's elements, followed by
+the bits of the L1 norm of the vector.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
+<p id="section-3.2-3">The validity circuit checks that the encoded measurement consists of ones and
+zeros, and that the encoded L1 norm is consistent with the encoded vector
+elements. The first checks, that all field elements are ones and zeros, are done
+in the same manner as in the <code>SumVec</code> circuit. The L1 norm is checked by
+decoding the reported L1 norm, decoding the measurement vector, recomputing the
+L1 norm, and subtracting to confirm they are identical.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
+<p id="section-3.2-4">The complete circuit is specified below.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
+<div class="breakable lang-python sourcecode" id="section-3.2-5">
 <pre>
-def eval(
-        self,
-        meas: list[F],
-        joint_rand: list[F],
-        num_shares: int) -&gt; list[F]:
-    weight = 0
-    for i in range(self.length):
-        weight += self.field.decode_from_bit_vector(
-            meas[i * self.bits : (i + 1) * self.bits]
-        )
-    weight_bits = self.field.encode_into_bit_vector(weight)
+class L1BoundSum(Valid[list[int], list[int], F]):
+    EVAL_OUTPUT_LEN = 2
+    length: int
+    bits: int
+    chunk_length: int
+    field: type[F]
 
-    sum_vec = SumVec(self.field, self.length + 1,
-                     self.bits, chunk_length)
-    return sum_vec.eval(meas + weight_bits, joint_rand, num_shares)
-</pre><a href="#section-3.3-2" class="pilcrow">¶</a>
-</div>
-<p id="section-3.3-3">Key characteristics of the validity circuit
-are summarized in <a href="#_table-prio3l1boundsum-validity" class="auto internal xref">Table 2</a>.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
-<span id="name-prio3l1boundsum-validity-ci"></span><div id="_table-prio3l1boundsum-validity">
-<table class="center" id="table-2">
-          <caption>
-<a href="#table-2" class="selfRef">Table 2</a>:
-<a href="#name-prio3l1boundsum-validity-ci" class="selfRef">Prio3L1BoundSum Validity Circuit Characteristics</a>
-          </caption>
-<thead>
-            <tr>
-              <th class="text-left" rowspan="1" colspan="1">Parameter</th>
-              <th class="text-left" rowspan="1" colspan="1">Value</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">GADGETS</td>
-              <td class="text-left" rowspan="1" colspan="1">[ParallelSum(Mul(), chunk_length)]</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">GADGET_CALLS</td>
-              <td class="text-left" rowspan="1" colspan="1">[ceil((length + 1) * bits / chunk_length)]</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">MEAS_LEN</td>
-              <td class="text-left" rowspan="1" colspan="1">length * bits</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">OUTPUT_LEN</td>
-              <td class="text-left" rowspan="1" colspan="1">length</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">JOINT_RAND_LEN</td>
-              <td class="text-left" rowspan="1" colspan="1">GADGET_CALLS[0]</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">EVAL_OUTPUT_LEN</td>
-              <td class="text-left" rowspan="1" colspan="1">1</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">Measurement</td>
-              <td class="text-left" rowspan="1" colspan="1">list[int], each element in range(2**bits)</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">AggResult</td>
-              <td class="text-left" rowspan="1" colspan="1">list[int]</td>
-            </tr>
-          </tbody>
-        </table>
+    def __init__(self,
+                 field: type[F],
+                 length: int,
+                 bits: int,
+                 chunk_length: int):
+        """
+        Instantiate the `L1BoundSum` circuit for measurements with
+        `length` elements, each in the range `[0, 2^bits)`, and with
+        a maximum L1 norm of `2^bits - 1`.
+        """
+        self.field = field
+        self.length = length
+        self.bits = bits
+        self.chunk_length = chunk_length
+        self.GADGETS = [ParallelSum(Mul(), chunk_length)]
+        self.GADGET_CALLS = [
+            ((length + 1) * bits + chunk_length - 1) // chunk_length
+        ]
+        self.MEAS_LEN = (length + 1) * bits
+        self.OUTPUT_LEN = length
+        self.JOINT_RAND_LEN = self.GADGET_CALLS[0]
+
+    def eval(
+            self,
+            meas: list[F],
+            joint_rand: list[F],
+            num_shares: int) -&gt; list[F]:
+        range_check = self.field(0)
+        shares_inv = self.field(num_shares).inv()
+        for i in range(self.GADGET_CALLS[0]):
+            r = joint_rand[i]
+            r_power = r
+            inputs: list[Optional[F]]
+            inputs = [None] * (2 * self.chunk_length)
+            for j in range(self.chunk_length):
+                index = i * self.chunk_length + j
+                if index &lt; len(meas):
+                    meas_elem = meas[index]
+                else:
+                    meas_elem = self.field(0)
+
+                inputs[j * 2] = r_power * meas_elem
+                inputs[j * 2 + 1] = meas_elem - shares_inv
+
+                r_power *= r
+
+            range_check += self.GADGETS[0].eval(
+                self.field,
+                cast(list[F], inputs),
+            )
+
+        observed_weight = self.field(0)
+        for i in range(self.length):
+            observed_weight += self.field.decode_from_bit_vector(
+                meas[i * self.bits:(i + 1) * self.bits]
+            )
+        weight_position = self.length * self.bits
+        claimed_weight = self.field.decode_from_bit_vector(
+            meas[weight_position:weight_position + self.bits]
+        )
+        weight_check = observed_weight - claimed_weight
+
+        return [range_check, weight_check]
+
+    def encode(self, measurement: list[int]) -&gt; list[F]:
+        encoded = []
+        for val in measurement:
+            encoded += self.field.encode_into_bit_vector(
+                val,
+                self.bits,
+            )
+        encoded += self.field.encode_into_bit_vector(
+            sum(measurement),
+            self.bits,
+        )
+        return encoded
+
+    def truncate(self, meas: list[F]) -&gt; list[F]:
+        truncated = []
+        for i in range(self.length):
+            truncated.append(self.field.decode_from_bit_vector(
+                meas[i * self.bits: (i + 1) * self.bits]
+            ))
+        return truncated
+
+    def decode(
+            self,
+            output: list[F],
+            _num_measurements) -&gt; list[int]:
+        return [x.as_unsigned() for x in output]
+</pre><a href="#section-3.2-5" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
