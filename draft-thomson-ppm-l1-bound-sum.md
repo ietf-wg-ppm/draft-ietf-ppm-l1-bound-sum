@@ -90,8 +90,8 @@ The instantiation is summarized in {{table-l1-bound-sum}}.
 
 | Parameter | Value |
 |:-|:-|
-| Valid | L1BoundSum(Field128, length, bits, chunk_length) |
-| Field | Field128 ({{Section 6.1.2 of VDAF}}) |
+| field | Field128 ({{Section 6.1.2 of VDAF}}) |
+| Valid | L1BoundSum(field, length, bits, chunk_length) |
 | PROOFS | 1 |
 | XOF | XofTurboShake128 ({{Section 6.2.1 of VDAF}}) |
 {: #table-l1-bound-sum title="Prio3L1BoundSum Parameters"}
@@ -102,7 +102,7 @@ The vector contains "`length`" components,
 each of which is a non-negative integer less than 2<sup>`bits`</sup>.
 
 
-## Chunk Length Choice
+## Chunk Length Selection
 
 The `chunk_length` parameter can be chosen
 in approximately the same way as for Prio3SumVec,
