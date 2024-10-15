@@ -97,139 +97,123 @@ The instantiation is summarized in {{table-l1-bound-sum}}.
 {: #table-l1-bound-sum title="Prio3L1BoundSum Parameters"}
 
 The function takes three parameters:
-length, bits, and chunk_length.
-The vector contains "length" components,
-each of which is a non-negative integer less than 2<sup>bits</sup>.
+`length`, `bits`, and `chunk_length`.
+The vector contains "`length`" components,
+each of which is a non-negative integer less than 2<sup>`bits`</sup>.
+
 
 ## Chunk Length Choice
 
-The chunk_length parameter can be chosen
+The `chunk_length` parameter can be chosen
 in approximately the same way as for Prio3SumVec,
 as detailed in {{Section 7.4.3.1 of VDAF}}.
 The difference is that Prio3L1BoundSum involves validation of
 `bits * (length + 1)` values,
-which might increase the most efficient value for chunk_length.
+which might increase the most efficient value for `chunk_length`.
+
+
+## Encoding and Decoding
+
+The encoded form of each measurement appends a bitwise decomposition
+of the L1 norm (the sum of the vector components) to the encoding:
+
+~~~ python
+def encode(self, measurement: list[int]) -> list[F]:
+    encoded = []
+    weight = self.field(0)
+    for v in measurement:
+        weight += v
+        encoded += self.field.encode_into_bit_vector(v, self.bits)
+    w_bits = self.field.encode_into_bit_vector(weight, self.bits)
+    return encoded + w_bits
+~~~
+
+The encoded measurement has a total length of `(length + 1) * bits`.
+
+This extra information is not included in the measurement
+that is submitted for aggregation.
+That is, the `truncate()` function emits only the core measurements.
+
+~~~ python
+def truncate(self, meas: list[F]) -> list[F]:
+    return [
+       self.field.decode_from_bit_vector(m)
+       for m in chunks(meas, self.bits)
+    ]
+~~~
+
+This uses a `chunks(v, c)` function that takes a list of values, `v`,
+and a chunk length, `c`,
+to split `v` into multiple lists from `v`,
+where each chunk has a length `c`.
+
+The `decode()` function is therefore identical to that in Prio3SumVec.
+
+~~~ python
+def decode(self, output: list[F], _count) -> list[int]:
+    return [x.as_unsigned() for x in output)
+~~~
 
 
 ## Validity Circuit
 
-The validity circuit for Prio3L1BoundSum uses a modified version of the
-Prio3SumVec validity circuit, see {{Section 7.4.3 of VDAF}}.
+The validity circuit for Prio3L1BoundSum uses an extended version
+of the validity circuit used by Prio3SumVec,
+see {{Section 7.4.3 of VDAF}}.
 
-The values from the measurement are extended to include their sum, so that the
-sum is checked in the same way as each vector component. The encoded measurement
-has a total length of `(length + 1) * bits`. The field elements in the encoded
-vector represent all the bits of the measurement vector's elements, followed by
-the bits of the L1 norm of the vector.
+The encoded measurement is checked
+to ensure that every component of the vector –
+plus the added L1 norm –
+is encoded in the specified number of bits.
+That is, the circuit checks that each component has a value between
+0 (inclusive) and 2<sup>`bits`</sup> (exclusive)
+by checking that each of the first "`bits`" bits of the value
+are either zero or one.
+This process is identical to the Prio3SumVec check,
+except that one additional value is checked.
 
-The validity circuit checks that the encoded measurement consists of ones and
-zeros, and that the encoded L1 norm is consistent with the encoded vector
-elements. The first checks, that all field elements are ones and zeros, are done
-in the same manner as in the `SumVec` circuit. The L1 norm is checked by
-decoding the reported L1 norm, decoding the measurement vector, recomputing the
-L1 norm, and subtracting to confirm they are identical.
+The validity circuit then checks whether the added L1 norm value
+is consistent with the encoded vector elements.
+The L1 norm is checked by decoding the measurement values,
+including the encoded L1 norm,
+recomputing the L1 norm as the sum of the individual components, and
+subtracting the reported and computed values
+to confirm that they are identical.
 
-The complete circuit is specified below.
+The complete circuit is specified in {{fig-eval}}.
 
 ~~~ python
-class L1BoundSum(Valid[list[int], list[int], F]):
-    EVAL_OUTPUT_LEN = 2
-    length: int
-    bits: int
-    chunk_length: int
-    field: type[F]
+def eval(self, meas: list[F],
+         joint_rand: list[F], num_shares: int) -> list[F]:
+    assert len(meas) == (self.length + 1) * self.bits
+    shares_inv = self.field(num_shares).inv()
+    parallel_sum = ParallelSum(Mul(), chunk_length)
 
-    def __init__(self,
-                 field: type[F],
-                 length: int,
-                 bits: int,
-                 chunk_length: int):
-        """
-        Instantiate the `L1BoundSum` circuit for measurements with
-        `length` elements, each in the range `[0, 2^bits)`, and with
-        a maximum L1 norm of `2^bits - 1`.
-        """
-        self.field = field
-        self.length = length
-        self.bits = bits
-        self.chunk_length = chunk_length
-        self.GADGETS = [ParallelSum(Mul(), chunk_length)]
-        self.GADGET_CALLS = [
-            ((length + 1) * bits + chunk_length - 1) // chunk_length
-        ]
-        self.MEAS_LEN = (length + 1) * bits
-        self.OUTPUT_LEN = length
-        self.JOINT_RAND_LEN = self.GADGET_CALLS[0]
+    num_chunks = ceil(len(meas) / self.chunk_length)
+    pad_len = self.chunk_length * num_chunks - len(meas)
+    meas += [self.field(0)] * pad_len
 
-    def eval(
-            self,
-            meas: list[F],
-            joint_rand: list[F],
-            num_shares: int) -> list[F]:
-        range_check = self.field(0)
-        shares_inv = self.field(num_shares).inv()
-        for i in range(self.GADGET_CALLS[0]):
-            r = joint_rand[i]
-            r_power = r
-            inputs: list[Optional[F]]
-            inputs = [None] * (2 * self.chunk_length)
-            for j in range(self.chunk_length):
-                index = i * self.chunk_length + j
-                if index < len(meas):
-                    meas_elem = meas[index]
-                else:
-                    meas_elem = self.field(0)
+    range_check = self.field(0)
+    for (r, m) in zip(joint_rand, chunks(meas, self.chunk_length)):
+        inputs = []
+        for i in range(self.chunk_length):
+            inputs += [
+                r**(i + 1) * m[i],
+                m[i] - shares_inv,
+            ]
+        range_check += parallel_sum.eval(self.field, inputs)
 
-                inputs[j * 2] = r_power * meas_elem
-                inputs[j * 2 + 1] = meas_elem - shares_inv
+    components = [
+        self.field.decode_from_bit_vector(m)
+        for m in chunks(meas, self.bits)
+    ]
+    observed_weight = sum(components[:self.length])
+    claimed_weight = components[self.length]
+    weight_check = observed_weight - claimed_weight
 
-                r_power *= r
-
-            range_check += self.GADGETS[0].eval(
-                self.field,
-                cast(list[F], inputs),
-            )
-
-        observed_weight = self.field(0)
-        for i in range(self.length):
-            observed_weight += self.field.decode_from_bit_vector(
-                meas[i * self.bits:(i + 1) * self.bits]
-            )
-        weight_position = self.length * self.bits
-        claimed_weight = self.field.decode_from_bit_vector(
-            meas[weight_position:weight_position + self.bits]
-        )
-        weight_check = observed_weight - claimed_weight
-
-        return [range_check, weight_check]
-
-    def encode(self, measurement: list[int]) -> list[F]:
-        encoded = []
-        for val in measurement:
-            encoded += self.field.encode_into_bit_vector(
-                val,
-                self.bits,
-            )
-        encoded += self.field.encode_into_bit_vector(
-            sum(measurement),
-            self.bits,
-        )
-        return encoded
-
-    def truncate(self, meas: list[F]) -> list[F]:
-        truncated = []
-        for i in range(self.length):
-            truncated.append(self.field.decode_from_bit_vector(
-                meas[i * self.bits: (i + 1) * self.bits]
-            ))
-        return truncated
-
-    def decode(
-            self,
-            output: list[F],
-            _num_measurements) -> list[int]:
-        return [x.as_unsigned() for x in output]
+    return [range_check, weight_check]
 ~~~
+{: #fig-eval title="Evaluation function for Prio3L1BoundSum"}
 
 
 # Security Considerations
@@ -271,4 +255,5 @@ Reference:
 # Acknowledgments
 {:numbered="false"}
 
-TODO acknowledge.
+David Cook and Chris Patton provided extensive input
+into the construction of this VDAF.
