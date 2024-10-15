@@ -223,7 +223,8 @@ def eval(self, meas: list[F],
 
 # Security Considerations
 
-The Prio3L1BoundSum VDAF is subject to the same considerations as other Prio-based VDAFs.
+The Prio3L1BoundSum VDAF is subject to the same considerations
+as other Prio-based VDAFs.
 These considerations are detailed in {{Section 9 of VDAF}}.
 
 In particular, this instantiation uses Field128 to ensure robustness
