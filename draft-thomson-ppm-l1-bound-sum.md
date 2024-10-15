@@ -36,7 +36,8 @@ informative:
 
 --- abstract
 
-A Prio Verifiable Distributed Aggregation Function is defined that supports vector or histogram addition,
+A Prio Verifiable Distributed Aggregation Function is defined
+that supports vector or histogram addition,
 where the sum of the values in the contribution is less than a chosen value.
 
 
@@ -60,19 +61,23 @@ The L1 norm of a vector is defined as the sum of its components.
 An L1 bound limits that sum to some maximum.
 
 This document defines the Prio3L1BoundSum instantiation.
-Unlike Prio3Histogram ({{Section 7.4.4 of VDAF}}),
-in which measurements need to have an L1 norm of exactly 1,
-a valid measurement for Prio3L1BoundSum can have an L1 norm equal to any value
-between 0 and the chosen limit.
-
 This instantiation limits the L1 norm of a vector or histogram
 to a value that is one less than a chosen power of 2,
 or 2<sup>n</sup>-1.
 This choice significantly reduces the size of the encoding
 relative to a more flexible limit.
 
-{{def}} defines the encoding of measurements for this instantiation
-and how the validation function is evaluated.
+This instantiation has similarities with other instantiations.
+Unlike Prio3Histogram ({{Section 7.4.4 of VDAF}}),
+in which measurements need to have an L1 norm of exactly 1,
+a valid measurement for Prio3L1BoundSum can have an L1 norm equal to any value
+between 0 and the chosen limit.
+Unlike Prio3MultiHotCountVec ({{Section 7.4.5 of VDAF}}),
+in which each component can only be zero or one,
+components in Prio3L1BoundSum can take any value up to the L1 bound
+as long as their sum is within that bound.
+
+{{def}} defines the Prio3L1BoundSum VDAF.
 
 
 # Conventions and Definitions
