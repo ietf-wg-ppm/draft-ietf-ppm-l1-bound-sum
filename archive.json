@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-15T01:47:13.716004+00:00",
+  "timestamp": "2024-10-17T01:46:03.102313+00:00",
   "repo": "martinthomson/prio-l1-bound-sum",
   "labels": [
     {
@@ -223,7 +223,7 @@
       "labels": [],
       "body": "Closes #2, stacked on PR #3.",
       "createdAt": "2024-10-11T17:21:35Z",
-      "updatedAt": "2024-10-11T17:21:35Z",
+      "updatedAt": "2024-10-16T00:55:10Z",
       "baseRepository": "martinthomson/prio-l1-bound-sum",
       "baseRefName": "main",
       "baseRefOid": "f0ad1e91607e83f36ce9a7c634a1a0fafea18e0b",
@@ -235,7 +235,28 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOM-k-FM6NUXCt",
+          "commit": {
+            "abbreviatedOid": "f80cb23"
+          },
+          "author": "martinthomson",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "Is there a simple way to test these without having to invoke the entire CI infrastructure?",
+          "createdAt": "2024-10-16T00:52:40Z",
+          "updatedAt": "2024-10-16T00:55:10Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "```suggestion\r\n      uses: actions/checkout@v4\r\n```",
+              "createdAt": "2024-10-16T00:52:40Z",
+              "updatedAt": "2024-10-16T00:55:10Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
