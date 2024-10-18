@@ -4,8 +4,9 @@
 
 Privacy Preserving Measurement                                M. Thomson
 Internet-Draft                                                   Mozilla
-Intended status: Standards Track                         15 October 2024
-Expires: 18 April 2025
+Intended status: Standards Track                                 D. Cook
+Expires: 21 April 2025                                              ISRG
+                                                         18 October 2024
 
 
      A Prio Instantiation for Vector Sums with an L1 Norm Bound on
@@ -50,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 April 2025.
+   This Internet-Draft will expire on 21 April 2025.
 
 Copyright Notice
 
@@ -80,7 +81,7 @@ Table of Contents
      6.1.  Normative References
      6.2.  Informative References
    Acknowledgments
-   Author's Address
+   Authors' Addresses
 
 1.  Introduction
 
@@ -304,8 +305,13 @@ Acknowledgments
    David Cook and Chris Patton provided extensive input into the
    construction of this VDAF.
 
-Author's Address
+Authors' Addresses
 
    Martin Thomson
    Mozilla
    Email: mt@lowentropy.net
+
+
+   David Cook
+   ISRG
+   Email: divergentdave@gmail.com
