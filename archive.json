@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-17T01:46:03.102313+00:00",
+  "timestamp": "2024-10-20T01:53:52.241548+00:00",
   "repo": "martinthomson/prio-l1-bound-sum",
   "labels": [
     {
@@ -57,7 +57,7 @@
       "url": "https://github.com/martinthomson/prio-l1-bound-sum/issues/1",
       "state": "CLOSED",
       "author": "divergentdave",
-      "authorAssociation": "CONTRIBUTOR",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "The `eval` function of the validity circuit needs to be arithmetic, so it can be evaluated with secret shares of measurements (using gadget polynomials for nonlinear parts). While `decode_from_bit_vector()` is arithmetic, since it just evaluates a linear combination using powers of two, `encode_into_bit_vector()` is not, since it does bitwise operations on the inputs. Instead, this circuit will need to explicitly specify its own `encode()`, `truncate()`, and `decode()` methods (forming an \"affine-aggregatable encoding\") and shift some of the non-arithmetic logic into `encode()`. My thinking is that the encoded measurement will consist of bit-vector-encoded numbers from the input vector, followed by one more bit-vector-encoded number that represents the vector weight that the client claims the measurement has. Then the validity circuit can do two things: a range check, that all encoded measurement field elements are 0 or 1, and a sum check, doing `decode_from_bit_vector()` to recover the measurement vector and the claimed weight, then subtracting them to confirm they are equal. We could return both of these checks out of the circuit, note that this would require setting `EVAL_OUTPUT_LEN = 2`. Implementing the validity checks this way is all arithmetic, (and only the range checks require nonlinear gadgets) so they're all possible to do on secret shares. Since the claimed vector weight gets encoded as a bit vector, and we check that each 'bit' is 0 or 1, the circuit will confirm that the vector weight is in [0, 2^bits).\r\n\r\nI can send a PR with these changes.",
@@ -73,7 +73,7 @@
       "url": "https://github.com/martinthomson/prio-l1-bound-sum/issues/2",
       "state": "OPEN",
       "author": "divergentdave",
-      "authorAssociation": "CONTRIBUTOR",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "It would be helpful to have a reference implementation of this Prio3 variant, making use the same Python snippets that are in the spec. This would allow testing and production of test vectors. The [PINE VDAF](https://github.com/junyechen1996/draft-chen-cfrg-vdaf-pine) can serve as an example of how to install, import, and extend the VDAF reference implementation.\r\n\r\nI can help out with a PR implementing this.",
@@ -91,7 +91,7 @@
       "url": "https://github.com/martinthomson/prio-l1-bound-sum/pull/3",
       "state": "MERGED",
       "author": "divergentdave",
-      "authorAssociation": "CONTRIBUTOR",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This closes #1. I also adopted an editorial change from the editor's copy of VDAF (coming soon to draft 13) to remove the parameter table and put initialization, `encode()`, `eval()`, `truncate()`, and `decode()` together in one sourcecode element.",
@@ -155,7 +155,7 @@
             "abbreviatedOid": "f860042"
           },
           "author": "divergentdave",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "COLLABORATOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-10-13T23:59:04Z",
@@ -175,7 +175,7 @@
             "abbreviatedOid": "f860042"
           },
           "author": "divergentdave",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "COLLABORATOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2024-10-14T00:02:03Z",
@@ -218,7 +218,7 @@
       "url": "https://github.com/martinthomson/prio-l1-bound-sum/pull/4",
       "state": "OPEN",
       "author": "divergentdave",
-      "authorAssociation": "CONTRIBUTOR",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Closes #2, stacked on PR #3.",
@@ -257,6 +257,60 @@
           ]
         }
       ]
+    },
+    {
+      "number": 5,
+      "id": "PR_kwDOM-k-FM5-54TH",
+      "title": "Add David as co-author",
+      "url": "https://github.com/martinthomson/prio-l1-bound-sum/pull/5",
+      "state": "MERGED",
+      "author": "martinthomson",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "@divergentdave, you should have a collaboration invitation in your inbox as well.",
+      "createdAt": "2024-10-17T01:49:47Z",
+      "updatedAt": "2024-10-18T06:49:57Z",
+      "baseRepository": "martinthomson/prio-l1-bound-sum",
+      "baseRefName": "main",
+      "baseRefOid": "8cc18e8139d82565dff96fea423ccc84f10eb68c",
+      "headRepository": "martinthomson/prio-l1-bound-sum",
+      "headRefName": "david-author",
+      "headRefOid": "ed2e2eb40d48e969101437ce25a0fd785d506121",
+      "closedAt": "2024-10-18T06:49:57Z",
+      "mergedAt": "2024-10-18T06:49:57Z",
+      "mergedBy": "martinthomson",
+      "mergeCommit": {
+        "oid": "ed2e2eb40d48e969101437ce25a0fd785d506121"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 6,
+      "id": "PR_kwDOM-k-FM5_JK8-",
+      "title": "Fix a bracket",
+      "url": "https://github.com/martinthomson/prio-l1-bound-sum/pull/6",
+      "state": "OPEN",
+      "author": "divergentdave",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This fixes an unbalanced bracket in the `decode()` method.",
+      "createdAt": "2024-10-18T20:32:56Z",
+      "updatedAt": "2024-10-18T20:32:57Z",
+      "baseRepository": "martinthomson/prio-l1-bound-sum",
+      "baseRefName": "main",
+      "baseRefOid": "ed2e2eb40d48e969101437ce25a0fd785d506121",
+      "headRepository": "martinthomson/prio-l1-bound-sum",
+      "headRefName": "david/fix-bracket",
+      "headRefOid": "2dc84fc3fceffd7dfb893133f5ddaff754ed0fd4",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
