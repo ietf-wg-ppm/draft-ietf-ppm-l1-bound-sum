@@ -5,8 +5,8 @@
 Privacy Preserving Measurement                                M. Thomson
 Internet-Draft                                                   Mozilla
 Intended status: Standards Track                                 D. Cook
-Expires: 21 April 2025                                              ISRG
-                                                         18 October 2024
+Expires: 24 April 2025                                              ISRG
+                                                         21 October 2024
 
 
      A Prio Instantiation for Vector Sums with an L1 Norm Bound on
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 April 2025.
+   This Internet-Draft will expire on 24 April 2025.
 
 Copyright Notice
 
@@ -192,7 +192,7 @@ Table of Contents
    The decode() function is therefore identical to that in Prio3SumVec.
 
    def decode(self, output: list[F], _count) -> list[int]:
-       return [x.as_unsigned() for x in output)
+       return [x.as_unsigned() for x in output]
 
 3.3.  Validity Circuit
 
