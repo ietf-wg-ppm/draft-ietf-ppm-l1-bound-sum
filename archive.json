@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-20T01:53:52.241548+00:00",
+  "timestamp": "2024-10-22T01:47:24.533988+00:00",
   "repo": "martinthomson/prio-l1-bound-sum",
   "labels": [
     {
@@ -291,26 +291,42 @@
       "id": "PR_kwDOM-k-FM5_JK8-",
       "title": "Fix a bracket",
       "url": "https://github.com/martinthomson/prio-l1-bound-sum/pull/6",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "divergentdave",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This fixes an unbalanced bracket in the `decode()` method.",
       "createdAt": "2024-10-18T20:32:56Z",
-      "updatedAt": "2024-10-18T20:32:57Z",
+      "updatedAt": "2024-10-21T00:50:45Z",
       "baseRepository": "martinthomson/prio-l1-bound-sum",
       "baseRefName": "main",
       "baseRefOid": "ed2e2eb40d48e969101437ce25a0fd785d506121",
       "headRepository": "martinthomson/prio-l1-bound-sum",
       "headRefName": "david/fix-bracket",
       "headRefOid": "2dc84fc3fceffd7dfb893133f5ddaff754ed0fd4",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-10-21T00:48:28Z",
+      "mergedAt": "2024-10-21T00:48:27Z",
+      "mergedBy": "martinthomson",
+      "mergeCommit": {
+        "oid": "25b15a776d781411fdcfe94283b46958d9e94713"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOM-k-FM6N5wI_",
+          "commit": {
+            "abbreviatedOid": "2dc84fc"
+          },
+          "author": "martinthomson",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-10-21T00:48:23Z",
+          "updatedAt": "2024-10-21T00:48:23Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
