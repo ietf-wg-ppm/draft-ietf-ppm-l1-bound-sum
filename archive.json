@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-29T01:48:23.831126+00:00",
+  "timestamp": "2024-10-31T01:48:23.091803+00:00",
   "repo": "martinthomson/prio-l1-bound-sum",
   "labels": [
     {
@@ -78,9 +78,17 @@
       "labels": [],
       "body": "It would be helpful to have a reference implementation of this Prio3 variant, making use the same Python snippets that are in the spec. This would allow testing and production of test vectors. The [PINE VDAF](https://github.com/junyechen1996/draft-chen-cfrg-vdaf-pine) can serve as an example of how to install, import, and extend the VDAF reference implementation.\r\n\r\nI can help out with a PR implementing this.",
       "createdAt": "2024-10-11T13:53:26Z",
-      "updatedAt": "2024-10-11T13:53:26Z",
+      "updatedAt": "2024-10-29T17:32:50Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "jimouris",
+          "authorAssociation": "NONE",
+          "body": "We are also considering including this validity circuit to [Mastic](https://github.com/jimouris/draft-mouris-cfrg-mastic).",
+          "createdAt": "2024-10-29T17:32:48Z",
+          "updatedAt": "2024-10-29T17:32:48Z"
+        }
+      ]
     }
   ],
   "pulls": [
