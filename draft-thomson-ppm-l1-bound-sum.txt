@@ -5,8 +5,8 @@
 Privacy Preserving Measurement                                M. Thomson
 Internet-Draft                                                   Mozilla
 Intended status: Standards Track                                 D. Cook
-Expires: 24 April 2025                                              ISRG
-                                                         21 October 2024
+Expires: 31 May 2025                                                ISRG
+                                                        27 November 2024
 
 
      A Prio Instantiation for Vector Sums with an L1 Norm Bound on
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 April 2025.
+   This Internet-Draft will expire on 31 May 2025.
 
 Copyright Notice
 
@@ -288,9 +288,9 @@ Table of Contents
 
    [VDAF]     Barnes, R., Cook, D., Patton, C., and P. Schoppmann,
               "Verifiable Distributed Aggregation Functions", Work in
-              Progress, Internet-Draft, draft-irtf-cfrg-vdaf-12, 4
-              October 2024, <https://datatracker.ietf.org/doc/html/
-              draft-irtf-cfrg-vdaf-12>.
+              Progress, Internet-Draft, draft-irtf-cfrg-vdaf-13, 2
+              November 2024, <https://datatracker.ietf.org/doc/html/
+              draft-irtf-cfrg-vdaf-13>.
 
 6.2.  Informative References
 
@@ -302,8 +302,8 @@ Table of Contents
 
 Acknowledgments
 
-   David Cook and Chris Patton provided extensive input into the
-   construction of this VDAF.
+   Chris Patton provided extensive input into the construction of this
+   VDAF.
 
 Authors' Addresses
 
