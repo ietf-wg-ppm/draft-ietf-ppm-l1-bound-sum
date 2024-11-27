@@ -265,5 +265,4 @@ Reference:
 # Acknowledgments
 {:numbered="false"}
 
-David Cook and Chris Patton provided extensive input
-into the construction of this VDAF.
+Chris Patton provided extensive input into the construction of this VDAF.
