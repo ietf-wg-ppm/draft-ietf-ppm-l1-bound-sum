@@ -1,0 +1,3 @@
+mypy
+git+https://github.com/cfrg/draft-irtf-cfrg-vdaf@draft-irtf-cfrg-vdaf-12#subdirectory=poc
+pycryptodomex >= 3.20.0
