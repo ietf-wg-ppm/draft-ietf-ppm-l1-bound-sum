@@ -5,8 +5,8 @@
 Privacy Preserving Measurement                                M. Thomson
 Internet-Draft                                                   Mozilla
 Intended status: Standards Track                                 D. Cook
-Expires: 31 May 2025                                                ISRG
-                                                        27 November 2024
+Expires: 2 November 2025                                            ISRG
+                                                              1 May 2025
 
 
      A Prio Instantiation for Vector Sums with an L1 Norm Bound on
@@ -51,11 +51,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 31 May 2025.
+   This Internet-Draft will expire on 2 November 2025.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -288,17 +288,13 @@ Table of Contents
 
    [VDAF]     Barnes, R., Cook, D., Patton, C., and P. Schoppmann,
               "Verifiable Distributed Aggregation Functions", Work in
-              Progress, Internet-Draft, draft-irtf-cfrg-vdaf-13, 2
-              November 2024, <https://datatracker.ietf.org/doc/html/
-              draft-irtf-cfrg-vdaf-13>.
+              Progress, Internet-Draft, draft-irtf-cfrg-vdaf-14, 10
+              January 2025, <https://datatracker.ietf.org/doc/html/
+              draft-irtf-cfrg-vdaf-14>.
 
 6.2.  Informative References
 
-   [PRIO]     Corrigan-Gibbs, H. and D. Boneh, "Prio: private, robust,
-              and scalable computation of aggregate statistics", USENIX
-              Association, Proceedings of the 14th USENIX Conference on
-              Networked Systems Design and Implementation pp. 259–282,
-              ISBN 9781931971379, March 2017.
+   [PRIO]     "*** BROKEN REFERENCE ***".
 
 Acknowledgments
 
