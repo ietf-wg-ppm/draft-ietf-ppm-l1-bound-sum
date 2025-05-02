@@ -16,7 +16,7 @@ if __name__ == "__main__":
     vdaf_test_vec_path = TEST_VECTOR_PATH + "/vdaf/"
 
     num_shares = 2
-    prio = Prio3L1BoundSum(2, 10, 8, 9)
+    prio = Prio3L1BoundSum(shares=2, length=10, bits=8, chunk_length=9)
     measurements = [
         list(range(10)),
         [255, 0, 0, 0, 0, 0, 0, 0, 0, 0],
