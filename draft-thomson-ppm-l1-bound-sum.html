@@ -1214,7 +1214,7 @@ all support a simple summation of measurements.
 From Prio3Count (<span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-14#section-7.4.1" class="relref">Section 7.4.1</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>),
 which adds measurements containing a single one or a zero value,
 to Prio3SumVec (<span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-14#section-7.4.3" class="relref">Section 7.4.3</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>),
-which adds measurements containing an vector where each dimension is a limited number of bits,
+which adds measurements containing a vector where each dimension is a limited number of bits,
 all instantations take the same basic form.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">One case that is presently not included in the suite of instantiations
 is the addition of vectors or histogram contributions,
@@ -1328,7 +1328,7 @@ def encode(self, measurement: list[int]) -&gt; list[F]:
 </pre><a href="#section-3.2-2" class="pilcrow">¶</a>
 </div>
 <p id="section-3.2-3">The encoded measurement has a total length of <code>(length + 1) * bits</code>.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
-<p id="section-3.2-4">This extra information is not included in the measurement
+<p id="section-3.2-4">This extra information is not included in the output share
 that is submitted for aggregation.
 That is, the <code>truncate()</code> function emits only the core measurements.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
 <div class="lang-python sourcecode" id="section-3.2-5">
