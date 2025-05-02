@@ -55,7 +55,7 @@ all support a simple summation of measurements.
 From Prio3Count ({{Section 7.4.1 of VDAF}}),
 which adds measurements containing a single one or a zero value,
 to Prio3SumVec ({{Section 7.4.3 of VDAF}}),
-which adds measurements containing an vector where each dimension is a limited number of bits,
+which adds measurements containing a vector where each dimension is a limited number of bits,
 all instantations take the same basic form.
 
 One case that is presently not included in the suite of instantiations
@@ -139,7 +139,7 @@ def encode(self, measurement: list[int]) -> list[F]:
 
 The encoded measurement has a total length of `(length + 1) * bits`.
 
-This extra information is not included in the measurement
+This extra information is not included in the output share
 that is submitted for aggregation.
 That is, the `truncate()` function emits only the core measurements.
 
