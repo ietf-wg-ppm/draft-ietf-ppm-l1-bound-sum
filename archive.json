@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-01T02:08:30.780334+00:00",
+  "timestamp": "2025-05-04T02:09:40.321496+00:00",
   "repo": "martinthomson/prio-l1-bound-sum",
   "labels": [
     {
@@ -71,15 +71,15 @@
       "id": "I_kwDOM-k-FM6Z3bbl",
       "title": "Reference implementation and test vectors",
       "url": "https://github.com/martinthomson/prio-l1-bound-sum/issues/2",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "divergentdave",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "It would be helpful to have a reference implementation of this Prio3 variant, making use the same Python snippets that are in the spec. This would allow testing and production of test vectors. The [PINE VDAF](https://github.com/junyechen1996/draft-chen-cfrg-vdaf-pine) can serve as an example of how to install, import, and extend the VDAF reference implementation.\r\n\r\nI can help out with a PR implementing this.",
       "createdAt": "2024-10-11T13:53:26Z",
-      "updatedAt": "2024-10-29T17:32:50Z",
-      "closedAt": null,
+      "updatedAt": "2025-05-01T23:11:49Z",
+      "closedAt": "2025-05-01T23:11:49Z",
       "comments": [
         {
           "author": "jimouris",
@@ -89,6 +89,38 @@
           "updatedAt": "2024-10-29T17:32:48Z"
         }
       ]
+    },
+    {
+      "number": 7,
+      "id": "I_kwDOM-k-FM603DBp",
+      "title": "Update VDAF reference",
+      "url": "https://github.com/martinthomson/prio-l1-bound-sum/issues/7",
+      "state": "OPEN",
+      "author": "divergentdave",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This was written when draft-irtf-cfrg-vdaf-12 was current, but the reference in the draft text is unversioned, `I-D.irtf-cfrg-vdaf`. We should pin the draft version and check if section numbers need to be updated.\n\nPR #4 also pulls in the proof of concept implementation, using the draft 12 git tag currently. When we update this, we can just use Python instead of Sage to run the code.",
+      "createdAt": "2025-05-01T17:28:25Z",
+      "updatedAt": "2025-05-01T17:28:25Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 8,
+      "id": "I_kwDOM-k-FM603DgO",
+      "title": "Pick VDAF algorithm ID",
+      "url": "https://github.com/martinthomson/prio-l1-bound-sum/issues/8",
+      "state": "OPEN",
+      "author": "divergentdave",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "We will need to pick a VDAF algorithm ID at some point. Currently, we are using 0xFFFF0000, from the \"Reserved for Private Use\" range.",
+      "createdAt": "2025-05-01T17:29:42Z",
+      "updatedAt": "2025-05-01T17:29:42Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -224,25 +256,35 @@
       "id": "PR_kwDOM-k-FM5-XdI-",
       "title": "Add reference implementation",
       "url": "https://github.com/martinthomson/prio-l1-bound-sum/pull/4",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "divergentdave",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Closes #2, stacked on PR #3.",
       "createdAt": "2024-10-11T17:21:35Z",
-      "updatedAt": "2024-10-16T00:55:10Z",
+      "updatedAt": "2025-05-01T23:59:24Z",
       "baseRepository": "martinthomson/prio-l1-bound-sum",
       "baseRefName": "main",
-      "baseRefOid": "f0ad1e91607e83f36ce9a7c634a1a0fafea18e0b",
+      "baseRefOid": "4365919e51ea76f9f00db8e7f351757e6c68efab",
       "headRepository": "divergentdave/prio-l1-bound-sum",
       "headRefName": "david/poc",
-      "headRefOid": "f80cb2313c086f6a136cff85ec31f6cd1b561d43",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "headRefOid": "6cc22fe28bf90fc4e0a12f433ba0b0f70e24e6c3",
+      "closedAt": "2025-05-01T23:11:49Z",
+      "mergedAt": "2025-05-01T23:11:49Z",
+      "mergedBy": "martinthomson",
+      "mergeCommit": {
+        "oid": "e4b3dc38d87bbe1b6a951312ced1c948a071213e"
+      },
+      "comments": [
+        {
+          "author": "divergentdave",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Apologies for the long delay. I rebased this on main, added a requirements.txt file, and added some documentation covering dependency installation, etc. Note that this currently requires Sage, but newer versions of the VDAF reference implementation only need Python 3.12. I'll file a separate issue for updating the VDAF reference and git tag.",
+          "createdAt": "2025-05-01T17:10:11Z",
+          "updatedAt": "2025-05-01T17:10:11Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOM-k-FM6NUXCt",
@@ -261,6 +303,46 @@
               "body": "```suggestion\r\n      uses: actions/checkout@v4\r\n```",
               "createdAt": "2024-10-16T00:52:40Z",
               "updatedAt": "2024-10-16T00:55:10Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOM-k-FM6niuo8",
+          "commit": {
+            "abbreviatedOid": "6cc22fe"
+          },
+          "author": "martinthomson",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "Thanks David, this is a little bit beyond me, but I like testing, so A1++.",
+          "createdAt": "2025-05-01T22:58:04Z",
+          "updatedAt": "2025-05-01T22:58:41Z",
+          "comments": [
+            {
+              "originalPosition": 19,
+              "body": "I'm not going to pretend that I understand all of these unlabeled parameters, but I will observe that they are unlabeled and that is not good.  The effect is that this is effectively write-only code, because you need a ton of context to understand any part of it.  That is a bit unfortunate; I'd encourage you to spend some time on improving that, though realize that this is a part of a much larger framework that would also need to move, so it's unlikely.",
+              "createdAt": "2025-05-01T22:58:04Z",
+              "updatedAt": "2025-05-01T22:58:41Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOM-k-FM6ni8jF",
+          "commit": {
+            "abbreviatedOid": "6cc22fe"
+          },
+          "author": "divergentdave",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-01T23:59:23Z",
+          "updatedAt": "2025-05-01T23:59:24Z",
+          "comments": [
+            {
+              "originalPosition": 19,
+              "body": "Fair point, I've been leaning on my IDE for this. Python lets me specify positional arguments as keyword arguments, so I'll go through and do that in a follow-up.",
+              "createdAt": "2025-05-01T23:59:24Z",
+              "updatedAt": "2025-05-01T23:59:24Z"
             }
           ]
         }
@@ -332,6 +414,90 @@
           "body": "",
           "createdAt": "2024-10-21T00:48:23Z",
           "updatedAt": "2024-10-21T00:48:23Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "id": "PR_kwDOM-k-FM6Uqpty",
+      "title": "Editorial changes",
+      "url": "https://github.com/martinthomson/prio-l1-bound-sum/pull/9",
+      "state": "MERGED",
+      "author": "divergentdave",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This makes a couple small editorial changes. I'd like to avoid using \"measurement\" to refer to the output of the truncate function, to avoid confusion. The description of the FLP interface in the VDAF spec uses the phrase \"aggregatable output\", while in the broader context of Prio3, this becomes the \"output share\" as defined by the VDAF interface.",
+      "createdAt": "2025-05-01T17:34:20Z",
+      "updatedAt": "2025-05-02T01:07:26Z",
+      "baseRepository": "martinthomson/prio-l1-bound-sum",
+      "baseRefName": "main",
+      "baseRefOid": "4365919e51ea76f9f00db8e7f351757e6c68efab",
+      "headRepository": "martinthomson/prio-l1-bound-sum",
+      "headRefName": "david/editorial",
+      "headRefOid": "61ea56c2d6429f9127dfc431fd1a289e36fe0cf9",
+      "closedAt": "2025-05-02T01:07:26Z",
+      "mergedAt": "2025-05-02T01:07:26Z",
+      "mergedBy": "martinthomson",
+      "mergeCommit": {
+        "oid": "773f1d60bf7d5a1e703dd378710d24b4cbeddb7b"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOM-k-FM6njIgZ",
+          "commit": {
+            "abbreviatedOid": "61ea56c"
+          },
+          "author": "martinthomson",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-02T01:07:20Z",
+          "updatedAt": "2025-05-02T01:07:20Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "id": "PR_kwDOM-k-FM6UspjL",
+      "title": "Clarify magic numbers",
+      "url": "https://github.com/martinthomson/prio-l1-bound-sum/pull/10",
+      "state": "MERGED",
+      "author": "divergentdave",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This adds some argument names and variable names to clarify what's going on in the VDAF tests.",
+      "createdAt": "2025-05-02T00:03:32Z",
+      "updatedAt": "2025-05-02T01:06:39Z",
+      "baseRepository": "martinthomson/prio-l1-bound-sum",
+      "baseRefName": "main",
+      "baseRefOid": "e4b3dc38d87bbe1b6a951312ced1c948a071213e",
+      "headRepository": "martinthomson/prio-l1-bound-sum",
+      "headRefName": "david/constructor-kwargs",
+      "headRefOid": "6b8e23350475344b89096687be28bd87a5df2a3a",
+      "closedAt": "2025-05-02T01:06:39Z",
+      "mergedAt": "2025-05-02T01:06:38Z",
+      "mergedBy": "martinthomson",
+      "mergeCommit": {
+        "oid": "b0284e049c8cfad503f9cb6317ef7857c6a2bfc5"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOM-k-FM6njIY4",
+          "commit": {
+            "abbreviatedOid": "6b8e233"
+          },
+          "author": "martinthomson",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "Much appreciated, thanks.",
+          "createdAt": "2025-05-02T01:06:34Z",
+          "updatedAt": "2025-05-02T01:06:34Z",
           "comments": []
         }
       ]
