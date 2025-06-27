@@ -57,7 +57,7 @@ where the sum of the values in the contribution is less than a chosen value.
 # Introduction
 
 Existing Prio instantiations of a Verifiable Distributed Aggregation Function (VDAF)
-{{!VDAF=I-D.irtf-cfrg-vdaf}}
+{{!VDAF=I-D.irtf-cfrg-vdaf-15}}
 all support a simple summation of measurements.
 From Prio3Count ({{Section 7.4.1 of VDAF}}),
 which adds measurements containing a single one or a zero value,
