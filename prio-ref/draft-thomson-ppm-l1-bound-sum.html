@@ -12,24 +12,24 @@
 that supports vector or histogram addition,
 where the sum of the values in the contribution is less than a chosen value. 
     " name="description">
-<meta content="xml2rfc 3.28.1" name="generator">
+<meta content="xml2rfc 3.29.0" name="generator">
 <meta content="vectors" name="keyword">
 <meta content="manhattan" name="keyword">
 <meta content="multi-dimensional" name="keyword">
 <meta content="draft-thomson-ppm-l1-bound-sum-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.28.1
-    Python 3.12.10
+  xml2rfc 3.29.0
+    Python 3.12.11
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
     Jinja2 3.1.6
-    lxml 5.3.0
-    platformdirs 4.3.7
+    lxml 5.3.1
+    platformdirs 4.3.8
     pycountry 24.6.1
     PyYAML 6.0.2
-    requests 2.32.3
-    setuptools 70.3.0
+    requests 2.32.4
+    setuptools 80.9.0
     wcwidth 0.2.13
 -->
 <link href="draft-thomson-ppm-l1-bound-sum.xml" rel="alternate" type="application/rfc+xml">
@@ -1049,11 +1049,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">Prio L1 Bound Sum</td>
-<td class="right">May 2025</td>
+<td class="right">June 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Thomson &amp; Cook</td>
-<td class="center">Expires 3 November 2025</td>
+<td class="center">Expires 29 December 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1066,12 +1066,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-thomson-ppm-l1-bound-sum-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-05-02" class="published">2 May 2025</time>
+<time datetime="2025-06-27" class="published">27 June 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-11-03">3 November 2025</time></dd>
+<dd class="expires"><time datetime="2025-12-29">29 December 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1127,7 +1127,7 @@ where the sum of the values in the contribution is less than a chosen value.<a h
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 3 November 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 29 December 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1211,10 +1211,10 @@ where the sum of the values in the contribution is less than a chosen value.<a h
 <p id="section-1-1">Existing Prio instantiations of a Verifiable Distributed Aggregation Function (VDAF)
 <span>[<a href="#VDAF" class="cite xref">VDAF</a>]</span>
 all support a simple summation of measurements.
-From Prio3Count (<span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-14#section-7.4.1" class="relref">Section 7.4.1</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>),
+From Prio3Count (<span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-15#section-7.4.1" class="relref">Section 7.4.1</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>),
 which adds measurements containing a single one or a zero value,
-to Prio3SumVec (<span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-14#section-7.4.3" class="relref">Section 7.4.3</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>),
-which adds measurements containing an vector where each dimension is a limited number of bits,
+to Prio3SumVec (<span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-15#section-7.4.3" class="relref">Section 7.4.3</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>),
+which adds measurements containing a vector where each dimension is a limited number of bits,
 all instantations take the same basic form.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">One case that is presently not included in the suite of instantiations
 is the addition of vectors or histogram contributions,
@@ -1228,11 +1228,11 @@ or 2<sup>n</sup>-1.
 This choice significantly reduces the size of the encoding
 relative to a more flexible limit.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4">This instantiation has similarities with other instantiations.
-Unlike Prio3Histogram (<span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-14#section-7.4.4" class="relref">Section 7.4.4</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>),
+Unlike Prio3Histogram (<span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-15#section-7.4.4" class="relref">Section 7.4.4</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>),
 in which measurements need to have an L1 norm of exactly 1,
 a valid measurement for Prio3L1BoundSum can have an L1 norm equal to any value
 between 0 and the chosen limit.
-Unlike Prio3MultiHotCountVec (<span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-14#section-7.4.5" class="relref">Section 7.4.5</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>),
+Unlike Prio3MultiHotCountVec (<span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-15#section-7.4.5" class="relref">Section 7.4.5</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>),
 in which each component can only be zero or one,
 components in Prio3L1BoundSum can take any value up to the L1 bound
 as long as their sum is within that bound.<a href="#section-1-4" class="pilcrow">¶</a></p>
@@ -1248,7 +1248,7 @@ as long as their sum is within that bound.<a href="#section-1-4" class="pilcrow"
 "<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
 described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
 appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
-<p id="section-2-2">This document uses the terminology and functions defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-14#section-2" class="relref">Section 2</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>.<a href="#section-2-2" class="pilcrow">¶</a></p>
+<p id="section-2-2">This document uses the terminology and functions defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-15#section-2" class="relref">Section 2</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>.<a href="#section-2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="def">
@@ -1256,9 +1256,9 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-prio3l1boundsum-definition">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-prio3l1boundsum-definition" class="section-name selfRef">Prio3L1BoundSum Definition</a>
       </h2>
-<p id="section-3-1">The Prio3L1BoundSum instantiation of Prio <span>[<a href="#PRIO" class="cite xref">PRIO</a>]</span>
-supports the addition of a vector of integers.
-The instantiation is summarized in <a href="#_table-l1-bound-sum" class="auto internal xref">Table 1</a>.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-1">The Prio3L1BoundSum instantiation of Prio <span>[<a href="#CGB17" class="cite xref">CGB17</a>]</span>
+supports the addition of a vector of integers.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-2">The instantiation is summarized in <a href="#_table-l1-bound-sum" class="auto internal xref">Table 1</a>.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <span id="name-prio3l1boundsum-parameters"></span><div id="_table-l1-bound-sum">
 <table class="center" id="table-1">
         <caption>
@@ -1274,7 +1274,7 @@ The instantiation is summarized in <a href="#_table-l1-bound-sum" class="auto in
         <tbody>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">field</td>
-            <td class="text-left" rowspan="1" colspan="1">Field128 (<span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-14#section-6.1.2" class="relref">Section 6.1.2</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>)</td>
+            <td class="text-left" rowspan="1" colspan="1">Field128 (<span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-15#section-6.1.2" class="relref">Section 6.1.2</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>)</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">Valid</td>
@@ -1286,15 +1286,15 @@ The instantiation is summarized in <a href="#_table-l1-bound-sum" class="auto in
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">XOF</td>
-            <td class="text-left" rowspan="1" colspan="1">XofTurboShake128 (<span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-14#section-6.2.1" class="relref">Section 6.2.1</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>)</td>
+            <td class="text-left" rowspan="1" colspan="1">XofTurboShake128 (<span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-15#section-6.2.1" class="relref">Section 6.2.1</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>)</td>
           </tr>
         </tbody>
       </table>
 </div>
-<p id="section-3-3">The function takes three parameters:
+<p id="section-3-4">The function takes three parameters:
 <code>length</code>, <code>bits</code>, and <code>chunk_length</code>.
 The vector contains "<code>length</code>" components,
-each of which is a non-negative integer less than 2<sup><code>bits</code></sup>.<a href="#section-3-3" class="pilcrow">¶</a></p>
+each of which is a non-negative integer less than 2<sup><code>bits</code></sup>.<a href="#section-3-4" class="pilcrow">¶</a></p>
 <div id="chunk-length-selection">
 <section id="section-3.1">
         <h3 id="name-chunk-length-selection">
@@ -1302,7 +1302,7 @@ each of which is a non-negative integer less than 2<sup><code>bits</code></sup>.
         </h3>
 <p id="section-3.1-1">The <code>chunk_length</code> parameter can be chosen
 in approximately the same way as for Prio3SumVec,
-as detailed in <span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-14#section-7.4.3.1" class="relref">Section 7.4.3.1</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>.
+as detailed in <span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-15#section-7.4.3.1" class="relref">Section 7.4.3.1</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>.
 The difference is that Prio3L1BoundSum involves validation of
 <code>bits * (length + 1)</code> values,
 which might increase the most efficient value for <code>chunk_length</code>.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
@@ -1328,7 +1328,7 @@ def encode(self, measurement: list[int]) -&gt; list[F]:
 </pre><a href="#section-3.2-2" class="pilcrow">¶</a>
 </div>
 <p id="section-3.2-3">The encoded measurement has a total length of <code>(length + 1) * bits</code>.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
-<p id="section-3.2-4">This extra information is not included in the measurement
+<p id="section-3.2-4">This extra information is not included in the output share
 that is submitted for aggregation.
 That is, the <code>truncate()</code> function emits only the core measurements.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
 <div class="lang-python sourcecode" id="section-3.2-5">
@@ -1360,7 +1360,7 @@ def decode(self, output: list[F], _count) -&gt; list[int]:
         </h3>
 <p id="section-3.3-1">The validity circuit for Prio3L1BoundSum uses an extended version
 of the validity circuit used by Prio3SumVec,
-see <span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-14#section-7.4.3" class="relref">Section 7.4.3</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
+see <span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-15#section-7.4.3" class="relref">Section 7.4.3</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
 <p id="section-3.3-2">The encoded measurement is checked
 to ensure that every component of the vector –
 plus the added L1 norm –
@@ -1429,7 +1429,7 @@ def eval(self, meas: list[F],
       </h2>
 <p id="section-4-1">The Prio3L1BoundSum VDAF is subject to the same considerations
 as other Prio-based VDAFs.
-These considerations are detailed in <span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-14#section-9" class="relref">Section 9</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>.<a href="#section-4-1" class="pilcrow">¶</a></p>
+These considerations are detailed in <span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-15#section-9" class="relref">Section 9</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <p id="section-4-2">In particular, this instantiation uses Field128 to ensure robustness
 despite the use of joint randomness in proofs.
 Joint randomness increases the risk of an attacker finding
@@ -1445,7 +1445,7 @@ of finding such a combination.<a href="#section-4-2" class="pilcrow">¶</a></p>
       </h2>
 <p id="section-5-1">This document registers a codepoint for Prio3L1BoundSum
 in the "Verifiable Distributed Aggregation Functions (VDAF)" registry
-as defined by <span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-14#section-10" class="relref">Section 10</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>.
+as defined by <span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-15#section-10" class="relref">Section 10</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>.
 This entry contains the following fields:<a href="#section-5-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-5-2">
         <dt id="section-5-2.1">Value:</dt>
@@ -1492,7 +1492,7 @@ This entry contains the following fields:<a href="#section-5-1" class="pilcrow">
 <dd class="break"></dd>
 <dt id="VDAF">[VDAF]</dt>
       <dd>
-<span class="refAuthor">Barnes, R.</span>, <span class="refAuthor">Cook, D.</span>, <span class="refAuthor">Patton, C.</span>, and <span class="refAuthor">P. Schoppmann</span>, <span class="refTitle">"Verifiable Distributed Aggregation Functions"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-vdaf-14</span>, <time datetime="2025-01-10" class="refDate">10 January 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-14">https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-14</a>&gt;</span>. </dd>
+<span class="refAuthor">Barnes, R.</span>, <span class="refAuthor">Cook, D.</span>, <span class="refAuthor">Patton, C.</span>, and <span class="refAuthor">P. Schoppmann</span>, <span class="refTitle">"Verifiable Distributed Aggregation Functions"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-vdaf-15</span>, <time datetime="2025-06-17" class="refDate">17 June 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-15">https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-15</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -1503,9 +1503,9 @@ This entry contains the following fields:<a href="#section-5-1" class="pilcrow">
 <a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
-<dt id="PRIO">[PRIO]</dt>
+<dt id="CGB17">[CGB17]</dt>
       <dd>
-<span class="refTitle">"*** BROKEN REFERENCE ***"</span>. </dd>
+<span class="refAuthor">Boneh, D.</span> and <span class="refAuthor">H. Corrigan-Gibbs</span>, <span class="refTitle">"Prio: Private, Robust, and Scalable Computation of Aggregate Statistics"</span>, <span class="refContent">USENIX Symposium on Networked Systems Design and Implementation (NSDI)</span>, <time datetime="2017" class="refDate">2017</time>, <span>&lt;<a href="https://dl.acm.org/doi/10.5555/3154630.3154652">https://dl.acm.org/doi/10.5555/3154630.3154652</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>

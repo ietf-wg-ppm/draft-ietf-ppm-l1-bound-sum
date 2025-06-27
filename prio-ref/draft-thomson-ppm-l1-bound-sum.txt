@@ -5,8 +5,8 @@
 Privacy Preserving Measurement                                M. Thomson
 Internet-Draft                                                   Mozilla
 Intended status: Standards Track                                 D. Cook
-Expires: 2 November 2025                                            ISRG
-                                                              1 May 2025
+Expires: 29 December 2025                                           ISRG
+                                                            27 June 2025
 
 
      A Prio Instantiation for Vector Sums with an L1 Norm Bound on
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 November 2025.
+   This Internet-Draft will expire on 29 December 2025.
 
 Copyright Notice
 
@@ -129,9 +129,10 @@ Table of Contents
 
 3.  Prio3L1BoundSum Definition
 
-   The Prio3L1BoundSum instantiation of Prio [PRIO] supports the
-   addition of a vector of integers.  The instantiation is summarized in
-   Table 1.
+   The Prio3L1BoundSum instantiation of Prio [CGB17] supports the
+   addition of a vector of integers.
+
+   The instantiation is summarized in Table 1.
 
        +===========+===============================================+
        | Parameter | Value                                         |
@@ -288,13 +289,17 @@ Table of Contents
 
    [VDAF]     Barnes, R., Cook, D., Patton, C., and P. Schoppmann,
               "Verifiable Distributed Aggregation Functions", Work in
-              Progress, Internet-Draft, draft-irtf-cfrg-vdaf-14, 10
-              January 2025, <https://datatracker.ietf.org/doc/html/
-              draft-irtf-cfrg-vdaf-14>.
+              Progress, Internet-Draft, draft-irtf-cfrg-vdaf-15, 17 June
+              2025, <https://datatracker.ietf.org/doc/html/draft-irtf-
+              cfrg-vdaf-15>.
 
 6.2.  Informative References
 
-   [PRIO]     "*** BROKEN REFERENCE ***".
+   [CGB17]    Boneh, D. and H. Corrigan-Gibbs, "Prio: Private, Robust,
+              and Scalable Computation of Aggregate Statistics", USENIX
+              Symposium on Networked Systems Design and Implementation
+              (NSDI), 2017,
+              <https://dl.acm.org/doi/10.5555/3154630.3154652>.
 
 Acknowledgments
 
