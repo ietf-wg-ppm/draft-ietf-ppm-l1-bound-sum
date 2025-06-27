@@ -36,7 +36,14 @@ author:
 normative:
 
 informative:
-
+  CGB17:
+    title: "Prio: Private, Robust, and Scalable Computation of Aggregate Statistics"
+    author:
+      - name: Dan Boneh
+      - name: Henry Corrigan-Gibbs
+    date: 2017
+    refcontent: "USENIX Symposium on Networked Systems Design and Implementation (NSDI)"
+    target: https://dl.acm.org/doi/10.5555/3154630.3154652
 
 --- abstract
 
@@ -93,8 +100,9 @@ This document uses the terminology and functions defined in {{Section 2 of VDAF}
 
 # Prio3L1BoundSum Definition {#def}
 
-The Prio3L1BoundSum instantiation of Prio {{?PRIO=DOI.10.5555/3154630.3154652}}
+The Prio3L1BoundSum instantiation of Prio {{CGB17}}
 supports the addition of a vector of integers.
+
 The instantiation is summarized in {{table-l1-bound-sum}}.
 
 | Parameter | Value |
