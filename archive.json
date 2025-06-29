@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-04T02:09:40.321496+00:00",
+  "timestamp": "2025-06-29T02:24:10.325588+00:00",
   "repo": "martinthomson/prio-l1-bound-sum",
   "labels": [
     {
@@ -501,6 +501,60 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 11,
+      "id": "PR_kwDOM-k-FM6cVfJV",
+      "title": "Update Prio reference due to a recurrent 404 on the ACM DOI",
+      "url": "https://github.com/martinthomson/prio-l1-bound-sum/pull/11",
+      "state": "MERGED",
+      "author": "martinthomson",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-06-27T02:02:09Z",
+      "updatedAt": "2025-06-27T02:02:38Z",
+      "baseRepository": "martinthomson/prio-l1-bound-sum",
+      "baseRefName": "main",
+      "baseRefOid": "773f1d60bf7d5a1e703dd378710d24b4cbeddb7b",
+      "headRepository": "martinthomson/prio-l1-bound-sum",
+      "headRefName": "prio-ref",
+      "headRefOid": "b00910c2ab19d8f9504cd5ea353609e40f43b123",
+      "closedAt": "2025-06-27T02:02:16Z",
+      "mergedAt": "2025-06-27T02:02:16Z",
+      "mergedBy": "martinthomson",
+      "mergeCommit": {
+        "oid": "b281c84f340281a15c6842d84678e66f108222d2"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 12,
+      "id": "PR_kwDOM-k-FM6ccPbe",
+      "title": "Update code and test vectors for VDAF draft-15",
+      "url": "https://github.com/martinthomson/prio-l1-bound-sum/pull/12",
+      "state": "OPEN",
+      "author": "divergentdave",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This updates the code dependency to the VDAF draft-15 tag, updates code to follow various method renames, and regenerates the test vector to pick up three format/schema changes. I also replaced use of Sage with Python, since this version of the VDAF code now does its own field implementation. All of the section number references to the VDAF document are still correct. Closes #7.",
+      "createdAt": "2025-06-27T14:53:32Z",
+      "updatedAt": "2025-06-27T15:12:13Z",
+      "baseRepository": "martinthomson/prio-l1-bound-sum",
+      "baseRefName": "main",
+      "baseRefOid": "b281c84f340281a15c6842d84678e66f108222d2",
+      "headRepository": "martinthomson/prio-l1-bound-sum",
+      "headRefName": "david/update-poc",
+      "headRefOid": "b7c9c7eedad171a9254cf4d63fc57e1f0330925f",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
