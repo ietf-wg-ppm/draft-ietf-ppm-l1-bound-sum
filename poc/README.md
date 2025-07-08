@@ -7,11 +7,10 @@ It is based on the [VDAF reference implementation][vdaf-poc].
 
 ## Installation
 
-This code requires [Sage](https://www.sagemath.org/) to run. To install
-dependencies:
+This code requires Python 3.12 to run. To install dependencies:
 
 ```
-sage -pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 ## Development
@@ -19,7 +18,7 @@ sage -pip install -r requirements.txt
 To run unit tests:
 
 ```
-sage -python -m unittest
+python -m unittest
 ```
 
 ## Generating test vectors
@@ -27,5 +26,5 @@ sage -python -m unittest
 To generate test vectors:
 
 ```
-sage -python gen_test_vec.py
+./gen_test_vec.py
 ```

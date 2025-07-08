@@ -57,7 +57,7 @@ where the sum of the values in the contribution is less than a chosen value.
 # Introduction
 
 Existing Prio instantiations of a Verifiable Distributed Aggregation Function (VDAF)
-{{!VDAF=I-D.irtf-cfrg-vdaf}}
+{{!VDAF=I-D.irtf-cfrg-vdaf-15}}
 all support a simple summation of measurements.
 From Prio3Count ({{Section 7.4.1 of VDAF}}),
 which adds measurements containing a single one or a zero value,
@@ -140,8 +140,8 @@ def encode(self, measurement: list[int]) -> list[F]:
     weight = self.field(0)
     for v in measurement:
         weight += v
-        encoded += self.field.encode_into_bit_vector(v, self.bits)
-    w_bits = self.field.encode_into_bit_vector(weight, self.bits)
+        encoded += self.field.encode_into_bit_vec(v, self.bits)
+    w_bits = self.field.encode_into_bit_vec(weight, self.bits)
     return encoded + w_bits
 ~~~
 
@@ -154,7 +154,7 @@ That is, the `truncate()` function emits only the core measurements.
 ~~~ python
 def truncate(self, meas: list[F]) -> list[F]:
     return [
-       self.field.decode_from_bit_vector(m)
+       self.field.decode_from_bit_vec(m)
        for m in chunks(meas, self.bits)
     ]
 ~~~
@@ -168,7 +168,7 @@ The `decode()` function is therefore identical to that in Prio3SumVec.
 
 ~~~ python
 def decode(self, output: list[F], _count) -> list[int]:
-    return [x.as_unsigned() for x in output]
+    return [x.int() for x in output]
 ~~~
 
 
@@ -221,7 +221,7 @@ def eval(self, meas: list[F],
         range_check += parallel_sum.eval(self.field, inputs)
 
     components = [
-        self.field.decode_from_bit_vector(m)
+        self.field.decode_from_bit_vec(m)
         for m in chunks(meas, self.bits)
     ]
     observed_weight = sum(components[:self.length])

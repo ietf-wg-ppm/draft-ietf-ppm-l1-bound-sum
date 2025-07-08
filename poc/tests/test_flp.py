@@ -67,17 +67,17 @@ class TestL1BoundSum(TestFlpBBCGGI19):
             flp,
             [
                 (
-                    field.encode_into_bit_vector(7, bits)
-                    + field.encode_into_bit_vector(0, bits)
-                    + field.encode_into_bit_vector(0, bits)
-                    + field.encode_into_bit_vector(0, bits)
-                    + field.encode_into_bit_vector(6, bits),
+                    field.encode_into_bit_vec(7, bits)
+                    + field.encode_into_bit_vec(0, bits)
+                    + field.encode_into_bit_vec(0, bits)
+                    + field.encode_into_bit_vec(0, bits)
+                    + field.encode_into_bit_vec(6, bits),
                     False,
                 ),
                 (
                     [field(2)]
                     + [field(0)] * 11
-                    + field.encode_into_bit_vector(2, bits),
+                    + field.encode_into_bit_vec(2, bits),
                     False,
                 ),
                 (
