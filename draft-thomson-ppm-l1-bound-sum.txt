@@ -5,8 +5,8 @@
 Privacy Preserving Measurement                                M. Thomson
 Internet-Draft                                                   Mozilla
 Intended status: Standards Track                                 D. Cook
-Expires: 29 December 2025                                           ISRG
-                                                            27 June 2025
+Expires: 9 January 2026                                             ISRG
+                                                             8 July 2025
 
 
      A Prio Instantiation for Vector Sums with an L1 Norm Bound on
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 29 December 2025.
+   This Internet-Draft will expire on 9 January 2026.
 
 Copyright Notice
 
@@ -170,8 +170,8 @@ Table of Contents
        weight = self.field(0)
        for v in measurement:
            weight += v
-           encoded += self.field.encode_into_bit_vector(v, self.bits)
-       w_bits = self.field.encode_into_bit_vector(weight, self.bits)
+           encoded += self.field.encode_into_bit_vec(v, self.bits)
+       w_bits = self.field.encode_into_bit_vec(weight, self.bits)
        return encoded + w_bits
 
    The encoded measurement has a total length of (length + 1) * bits.
@@ -182,7 +182,7 @@ Table of Contents
 
    def truncate(self, meas: list[F]) -> list[F]:
        return [
-          self.field.decode_from_bit_vector(m)
+          self.field.decode_from_bit_vec(m)
           for m in chunks(meas, self.bits)
        ]
 
@@ -193,7 +193,7 @@ Table of Contents
    The decode() function is therefore identical to that in Prio3SumVec.
 
    def decode(self, output: list[F], _count) -> list[int]:
-       return [x.as_unsigned() for x in output]
+       return [x.int() for x in output]
 
 3.3.  Validity Circuit
 
@@ -239,7 +239,7 @@ Table of Contents
            range_check += parallel_sum.eval(self.field, inputs)
 
        components = [
-           self.field.decode_from_bit_vector(m)
+           self.field.decode_from_bit_vec(m)
            for m in chunks(meas, self.bits)
        ]
        observed_weight = sum(components[:self.length])
