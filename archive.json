@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-29T02:24:10.325588+00:00",
+  "timestamp": "2025-07-10T02:09:52.484400+00:00",
   "repo": "martinthomson/prio-l1-bound-sum",
   "labels": [
     {
@@ -95,15 +95,15 @@
       "id": "I_kwDOM-k-FM603DBp",
       "title": "Update VDAF reference",
       "url": "https://github.com/martinthomson/prio-l1-bound-sum/issues/7",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "divergentdave",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This was written when draft-irtf-cfrg-vdaf-12 was current, but the reference in the draft text is unversioned, `I-D.irtf-cfrg-vdaf`. We should pin the draft version and check if section numbers need to be updated.\n\nPR #4 also pulls in the proof of concept implementation, using the draft 12 git tag currently. When we update this, we can just use Python instead of Sage to run the code.",
       "createdAt": "2025-05-01T17:28:25Z",
-      "updatedAt": "2025-05-01T17:28:25Z",
-      "closedAt": null,
+      "updatedAt": "2025-07-08T22:10:38Z",
+      "closedAt": "2025-07-08T22:10:38Z",
       "comments": []
     },
     {
@@ -535,25 +535,42 @@
       "id": "PR_kwDOM-k-FM6ccPbe",
       "title": "Update code and test vectors for VDAF draft-15",
       "url": "https://github.com/martinthomson/prio-l1-bound-sum/pull/12",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "divergentdave",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This updates the code dependency to the VDAF draft-15 tag, updates code to follow various method renames, and regenerates the test vector to pick up three format/schema changes. I also replaced use of Sage with Python, since this version of the VDAF code now does its own field implementation. All of the section number references to the VDAF document are still correct. Closes #7.",
       "createdAt": "2025-06-27T14:53:32Z",
-      "updatedAt": "2025-06-27T15:12:13Z",
+      "updatedAt": "2025-07-08T22:11:04Z",
       "baseRepository": "martinthomson/prio-l1-bound-sum",
       "baseRefName": "main",
       "baseRefOid": "b281c84f340281a15c6842d84678e66f108222d2",
       "headRepository": "martinthomson/prio-l1-bound-sum",
       "headRefName": "david/update-poc",
       "headRefOid": "b7c9c7eedad171a9254cf4d63fc57e1f0330925f",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "closedAt": "2025-07-08T22:10:37Z",
+      "mergedAt": "2025-07-08T22:10:37Z",
+      "mergedBy": "martinthomson",
+      "mergeCommit": {
+        "oid": "76b12f16db35b43765a2783e8995c04f3ef7619d"
+      },
+      "comments": [
+        {
+          "author": "tgeoghegan",
+          "authorAssociation": "NONE",
+          "body": "I've implemented this in libprio-rs (https://github.com/divviup/libprio-rs/pull/1292) and it works, so I vote for merging this. In particular, it would be nice to publish a `draft-mthomson-ppm-l1-bound-sum` revision with this change. I think we'll want to do some performance testing with this in the near future and it'd be nice to have a solid handle to a draft to refer to.",
+          "createdAt": "2025-07-08T20:19:51Z",
+          "updatedAt": "2025-07-08T20:19:51Z"
+        },
+        {
+          "author": "martinthomson",
+          "authorAssociation": "OWNER",
+          "body": "Oops, my bad.  I should have merged this already.  It's good to hear that this is working out!",
+          "createdAt": "2025-07-08T22:11:04Z",
+          "updatedAt": "2025-07-08T22:11:04Z"
+        }
+      ],
       "reviews": []
     }
   ]
