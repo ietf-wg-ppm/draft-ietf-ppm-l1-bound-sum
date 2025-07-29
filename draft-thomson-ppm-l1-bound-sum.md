@@ -255,7 +255,7 @@ as defined by {{Section 10 of VDAF}}.
 This entry contains the following fields:
 
 Value:
-: 0xTBD
+: 0x00000007
 
 Scheme:
 : Prio3L1BoundSum
