@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-10T02:09:52.484400+00:00",
+  "timestamp": "2025-07-29T02:32:30.652144+00:00",
   "repo": "martinthomson/prio-l1-bound-sum",
   "labels": [
     {
@@ -118,9 +118,17 @@
       "labels": [],
       "body": "We will need to pick a VDAF algorithm ID at some point. Currently, we are using 0xFFFF0000, from the \"Reserved for Private Use\" range.",
       "createdAt": "2025-05-01T17:29:42Z",
-      "updatedAt": "2025-05-01T17:29:42Z",
+      "updatedAt": "2025-07-28T22:02:29Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "divergentdave",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I'd like to pick out a non-private use algorithm ID for Prio3L1BoundSum soon, as we expect to deploy this VDAF some time in the coming year. We haven't gotten to the point of asking IANA to create the VDAF identifier registry yet, so in the meantime we can coordinate codepoint selection between document authors. I plan to write a PR to specify the ID here, (I'm thinking of using 0x00000007, the next available number after those defined in `draft-irtf-cfrg-vdaf`) and make a post on the PPM mailing list, for coordination and discussion.",
+          "createdAt": "2025-07-28T22:02:29Z",
+          "updatedAt": "2025-07-28T22:02:29Z"
+        }
+      ]
     }
   ],
   "pulls": [
