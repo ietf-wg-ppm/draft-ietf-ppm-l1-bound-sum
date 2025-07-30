@@ -7,7 +7,7 @@ from flp_l1_bound_sum import L1BoundSum
 
 
 class Prio3L1BoundSum(Prio3[list[int], list[int], Field128]):
-    ID = 0xFFFF0000  # TODO: select algorithm ID
+    ID = 0x00000007
     xof = XofTurboShake128
     VERIFY_KEY_SIZE = xof.SEED_SIZE
 
