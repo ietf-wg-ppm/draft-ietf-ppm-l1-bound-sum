@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-31T02:23:15.929665+00:00",
+  "timestamp": "2025-08-03T02:33:24.031939+00:00",
   "repo": "martinthomson/prio-l1-bound-sum",
   "labels": [
     {
@@ -593,7 +593,7 @@
       "labels": [],
       "body": "This PR makes a selection for the VDAF algorithm identifier, and regenerates test vectors. I chose `0x00000007`, as it is the next number not used in `draft-irtf-cfrg-vdaf`. As far as I'm aware, no other VDAF identifiers are currently in use besides private use range values. Closes #8.",
       "createdAt": "2025-07-29T14:53:12Z",
-      "updatedAt": "2025-07-30T09:37:45Z",
+      "updatedAt": "2025-08-01T22:49:46Z",
       "baseRepository": "martinthomson/prio-l1-bound-sum",
       "baseRefName": "main",
       "baseRefOid": "76b12f16db35b43765a2783e8995c04f3ef7619d",
