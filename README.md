@@ -1,21 +1,22 @@
+<!-- regenerate: on (set to off if you edit this file) -->
+
 # A Prio Instantiation for Vector Sums with an L1 Norm Bound on Contributions
 
-This is the working area for the individual Internet-Draft, "A Prio Instantiation for Vector Sums with an L1 Norm Bound on Contributions".
+This is the working area for the IETF [PPM Working Group](https://datatracker.ietf.org/group/ppm/documents/) Internet-Draft, "A Prio Instantiation for Vector Sums with an L1 Norm Bound on Contributions".
 
-* [Editor's Copy](https://martinthomson.github.io/prio-l1-bound-sum/#go.draft-thomson-ppm-l1-bound-sum.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-thomson-ppm-l1-bound-sum)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-thomson-ppm-l1-bound-sum)
-* [Compare Editor's Copy to Individual Draft](https://martinthomson.github.io/prio-l1-bound-sum/#go.draft-thomson-ppm-l1-bound-sum.diff)
+* [Editor's Copy](https://ietf-wg-ppm.github.io/draft-ietf-ppm-l1-bound-sum/#go.draft-ietf-ppm-l1-bound-sum.html)
+* [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-ppm-l1-bound-sum)
+* [Working Group Draft](https://datatracker.ietf.org/doc/html/draft-ietf-ppm-l1-bound-sum)
+* [Compare Editor's Copy to Working Group Draft](https://ietf-wg-ppm.github.io/draft-ietf-ppm-l1-bound-sum/#go.draft-ietf-ppm-l1-bound-sum.diff)
 
 
 ## Contributing
 
 See the
-[guidelines for contributions](https://github.com/martinthomson/prio-l1-bound-sum/blob/main/CONTRIBUTING.md).
+[guidelines for contributions](https://github.com/ietf-wg-ppm/draft-ietf-ppm-l1-bound-sum/blob/main/CONTRIBUTING.md).
 
-Contributions can be made by creating pull requests.
-The GitHub interface supports creating pull requests using the Edit (✏) button.
-
+The contributing file also has tips on how to make contributions, if you
+don't already know how to do that.
 
 ## Command Line Usage
 
