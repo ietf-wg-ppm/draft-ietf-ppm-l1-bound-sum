@@ -7,7 +7,9 @@
 *~
 .tags
 /*-[0-9][0-9].xml
+/.*.mk
 /.gems/
+/.idea/
 /.refcache
 /.targets.mk
 /.venv/
@@ -15,9 +17,10 @@
 /lib
 /node_modules/
 /versioned/
-__pycache__
 Gemfile.lock
+__pycache__
 archive.json
+draft-ietf-ppm-l1-bound-sum.xml
 draft-ppm-thomson-l1-bound-sum.xml
 draft-thomson-ppm-l1-bound-sum.xml
 package-lock.json
