@@ -5,13 +5,13 @@
 Privacy Preserving Measurement                                M. Thomson
 Internet-Draft                                                   Mozilla
 Intended status: Standards Track                                 D. Cook
-Expires: 31 January 2026                                            ISRG
-                                                            30 July 2025
+Expires: 5 February 2026                                            ISRG
+                                                           4 August 2025
 
 
      A Prio Instantiation for Vector Sums with an L1 Norm Bound on
                              Contributions
-                 draft-thomson-ppm-l1-bound-sum-latest
+                   draft-ietf-ppm-l1-bound-sum-latest
 
 Abstract
 
@@ -26,7 +26,7 @@ About This Document
    The latest revision of this draft can be found at
    https://martinthomson.github.io/prio-l1-bound-sum/draft-thomson-ppm-
    l1-bound-sum.html.  Status information for this document may be found
-   at https://datatracker.ietf.org/doc/draft-thomson-ppm-l1-bound-sum/.
+   at https://datatracker.ietf.org/doc/draft-ietf-ppm-l1-bound-sum/.
 
    Discussion of this document takes place on the Privacy Preserving
    Measurement Working Group mailing list (mailto:ppm@ietf.org), which
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 31 January 2026.
+   This Internet-Draft will expire on 5 February 2026.
 
 Copyright Notice
 
