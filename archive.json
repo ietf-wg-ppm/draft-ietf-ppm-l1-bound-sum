@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-05T02:26:29.412819+00:00",
+  "timestamp": "2025-08-10T02:28:38.339275+00:00",
   "repo": "ietf-wg-ppm/draft-ietf-ppm-l1-bound-sum",
   "labels": [
     {
@@ -368,7 +368,7 @@
       "labels": [],
       "body": "@divergentdave, you should have a collaboration invitation in your inbox as well.",
       "createdAt": "2024-10-17T01:49:47Z",
-      "updatedAt": "2024-10-18T06:49:57Z",
+      "updatedAt": "2025-08-08T15:05:41Z",
       "baseRepository": "ietf-wg-ppm/draft-ietf-ppm-l1-bound-sum",
       "baseRefName": "main",
       "baseRefOid": "8cc18e8139d82565dff96fea423ccc84f10eb68c",
