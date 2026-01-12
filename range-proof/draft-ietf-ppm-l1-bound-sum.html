@@ -12,25 +12,24 @@
 that supports vector or histogram addition,
 where the sum of the values in the contribution is less than a chosen value. 
     " name="description">
-<meta content="xml2rfc 3.30.0" name="generator">
+<meta content="xml2rfc 3.31.0" name="generator">
 <meta content="vectors" name="keyword">
 <meta content="manhattan" name="keyword">
 <meta content="multi-dimensional" name="keyword">
 <meta content="draft-ietf-ppm-l1-bound-sum-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.30.0
-    Python 3.12.11
+  xml2rfc 3.31.0
+    Python 3.12.12
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
-    intervaltree 3.1.0
+    intervaltree 3.2.1
     Jinja2 3.1.6
-    lxml 5.3.1
-    platformdirs 4.3.8
+    lxml 6.0.2
+    platformdirs 4.5.1
     pycountry 24.6.1
-    PyYAML 6.0.2
-    requests 2.32.4
-    setuptools 80.9.0
-    wcwidth 0.2.13
+    PyYAML 6.0.3
+    requests 2.32.5
+    wcwidth 0.2.14
 -->
 <link href="draft-ietf-ppm-l1-bound-sum.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1049,11 +1048,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">Prio L1 Bound Sum</td>
-<td class="right">August 2025</td>
+<td class="right">January 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Thomson &amp; Cook</td>
-<td class="center">Expires 5 February 2026</td>
+<td class="center">Expires 16 July 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1066,12 +1065,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-ppm-l1-bound-sum-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-08-04" class="published">4 August 2025</time>
+<time datetime="2026-01-12" class="published">12 January 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-02-05">5 February 2026</time></dd>
+<dd class="expires"><time datetime="2026-07-16">16 July 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1127,7 +1126,7 @@ where the sum of the values in the contribution is less than a chosen value.<a h
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 5 February 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 16 July 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1136,7 +1135,7 @@ where the sum of the values in the contribution is less than a chosen value.<a h
 <a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
         </h2>
 <p id="section-boilerplate.2-1">
-            Copyright (c) 2025 IETF Trust and the persons identified as the
+            Copyright (c) 2026 IETF Trust and the persons identified as the
             document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.2-2">
             This document is subject to BCP 78 and the IETF Trust's Legal
@@ -1173,6 +1172,9 @@ where the sum of the values in the contribution is less than a chosen value.<a h
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
                 <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-validity-circuit" class="internal xref">Validity Circuit</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4">
+                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="auto internal xref">3.4</a>.  <a href="#name-range-proof-encoding-and-de" class="internal xref">Range Proof Encoding and Decoding</a></p>
 </li>
             </ul>
 </li>
@@ -1211,9 +1213,9 @@ where the sum of the values in the contribution is less than a chosen value.<a h
 <p id="section-1-1">Existing Prio instantiations of a Verifiable Distributed Aggregation Function (VDAF)
 <span>[<a href="#VDAF" class="cite xref">VDAF</a>]</span>
 all support a simple summation of measurements.
-From Prio3Count (<span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-15#section-7.4.1" class="relref">Section 7.4.1</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>),
+From Prio3Count (<span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-17#section-7.4.1" class="relref">Section 7.4.1</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>),
 which adds measurements containing a single one or a zero value,
-to Prio3SumVec (<span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-15#section-7.4.3" class="relref">Section 7.4.3</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>),
+to Prio3SumVec (<span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-17#section-7.4.3" class="relref">Section 7.4.3</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>),
 which adds measurements containing a vector where each dimension is a limited number of bits,
 all instantations take the same basic form.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">One case that is presently not included in the suite of instantiations
@@ -1223,16 +1225,13 @@ The L1 norm of a vector is defined as the sum of its components.
 An L1 bound limits that sum to some maximum.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">This document defines the Prio3L1BoundSum instantiation.
 This instantiation limits the L1 norm of a vector or histogram
-to a value that is one less than a chosen power of 2,
-or 2<sup>n</sup>-1.
-This choice significantly reduces the size of the encoding
-relative to a more flexible limit.<a href="#section-1-3" class="pilcrow">¶</a></p>
+to a value less than a predetermined maximum.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4">This instantiation has similarities with other instantiations.
-Unlike Prio3Histogram (<span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-15#section-7.4.4" class="relref">Section 7.4.4</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>),
+Unlike Prio3Histogram (<span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-17#section-7.4.4" class="relref">Section 7.4.4</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>),
 in which measurements need to have an L1 norm of exactly 1,
 a valid measurement for Prio3L1BoundSum can have an L1 norm equal to any value
 between 0 and the chosen limit.
-Unlike Prio3MultiHotCountVec (<span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-15#section-7.4.5" class="relref">Section 7.4.5</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>),
+Unlike Prio3MultiHotCountVec (<span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-17#section-7.4.5" class="relref">Section 7.4.5</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>),
 in which each component can only be zero or one,
 components in Prio3L1BoundSum can take any value up to the L1 bound
 as long as their sum is within that bound.<a href="#section-1-4" class="pilcrow">¶</a></p>
@@ -1248,7 +1247,8 @@ as long as their sum is within that bound.<a href="#section-1-4" class="pilcrow"
 "<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
 described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
 appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
-<p id="section-2-2">This document uses the terminology and functions defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-15#section-2" class="relref">Section 2</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>.<a href="#section-2-2" class="pilcrow">¶</a></p>
+<p id="section-2-2">This document uses the terminology, notation conventions, and functions
+defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-17#section-2" class="relref">Section 2</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>.<a href="#section-2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="def">
@@ -1257,7 +1257,10 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-prio3l1boundsum-definition" class="section-name selfRef">Prio3L1BoundSum Definition</a>
       </h2>
 <p id="section-3-1">The Prio3L1BoundSum instantiation of Prio <span>[<a href="#CGB17" class="cite xref">CGB17</a>]</span>
-supports the addition of a vector of integers.<a href="#section-3-1" class="pilcrow">¶</a></p>
+supports the addition of a vector of integers.
+It also uses <code>bit_length()</code>,
+which returns the minimum number of bits
+needed to encode an integer value.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">The instantiation is summarized in <a href="#_table-l1-bound-sum" class="auto internal xref">Table 1</a>.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <span id="name-prio3l1boundsum-parameters"></span><div id="_table-l1-bound-sum">
 <table class="center" id="table-1">
@@ -1274,11 +1277,11 @@ supports the addition of a vector of integers.<a href="#section-3-1" class="pilc
         <tbody>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">field</td>
-            <td class="text-left" rowspan="1" colspan="1">Field128 (<span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-15#section-6.1.2" class="relref">Section 6.1.2</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>)</td>
+            <td class="text-left" rowspan="1" colspan="1">Field128 (<span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-17#section-6.1.2" class="relref">Section 6.1.2</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>)</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">Valid</td>
-            <td class="text-left" rowspan="1" colspan="1">L1BoundSum(field, length, bits, chunk_length)</td>
+            <td class="text-left" rowspan="1" colspan="1">L1BoundSum(field, length, max, chunk_length)</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">PROOFS</td>
@@ -1286,15 +1289,20 @@ supports the addition of a vector of integers.<a href="#section-3-1" class="pilc
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">XOF</td>
-            <td class="text-left" rowspan="1" colspan="1">XofTurboShake128 (<span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-15#section-6.2.1" class="relref">Section 6.2.1</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>)</td>
+            <td class="text-left" rowspan="1" colspan="1">XofTurboShake128 (<span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-17#section-6.2.1" class="relref">Section 6.2.1</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>)</td>
           </tr>
         </tbody>
       </table>
 </div>
 <p id="section-3-4">The function takes three parameters:
-<code>length</code>, <code>bits</code>, and <code>chunk_length</code>.
+<code>length</code>, <code>max_value</code>, and <code>chunk_length</code>.
 The vector contains "<code>length</code>" components,
-each of which is a non-negative integer less than 2<sup><code>bits</code></sup>.<a href="#section-3-4" class="pilcrow">¶</a></p>
+each of which is a non-negative integer less than <code>max_value</code>.<a href="#section-3-4" class="pilcrow">¶</a></p>
+<p id="section-3-5">The value of <code>max_value</code> can be any non-negative integer
+greater than 1.
+A value of 2 causes Prio3L1BoundSum
+to be nearly identical to Prio3Histogram,
+except that Prio3Histogram cannot encode an all-zero report.<a href="#section-3-5" class="pilcrow">¶</a></p>
 <div id="chunk-length-selection">
 <section id="section-3.1">
         <h3 id="name-chunk-length-selection">
@@ -1302,10 +1310,12 @@ each of which is a non-negative integer less than 2<sup><code>bits</code></sup>.
         </h3>
 <p id="section-3.1-1">The <code>chunk_length</code> parameter can be chosen
 in approximately the same way as for Prio3SumVec,
-as detailed in <span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-15#section-7.4.3.1" class="relref">Section 7.4.3.1</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>.
+as detailed in <span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-17#section-7.4.3.1" class="relref">Section 7.4.3.1</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>.
 The difference is that Prio3L1BoundSum involves validation of
 <code>bits * (length + 1)</code> values,
-which might increase the most efficient value for <code>chunk_length</code>.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+where <code>bits = max_value.bit_length()</code>.
+This might increase the most efficient value for <code>chunk_length</code>
+relative to a similar encoding of Prio3SumVec.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="encoding-and-decoding">
@@ -1320,36 +1330,38 @@ of the L1 norm (the sum of the vector components) to the encoding:<a href="#sect
 def encode(self, measurement: list[int]) -&gt; list[F]:
     encoded = []
     weight = self.field(0)
+    bits = self.max_value.bit_length()
     for v in measurement:
         weight += v
-        encoded += self.field.encode_into_bit_vec(v, self.bits)
-    w_bits = self.field.encode_into_bit_vec(weight, self.bits)
+        encoded += self.field.encode_into_bit_vec(v, bits)
+    w_bits = self.field.encode_range_bits(weight, self.max_value)
     return encoded + w_bits
 </pre><a href="#section-3.2-2" class="pilcrow">¶</a>
 </div>
 <p id="section-3.2-3">The encoded measurement has a total length of <code>(length + 1) * bits</code>.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
-<p id="section-3.2-4">This extra information is not included in the output share
+<p id="section-3.2-4">The encoding function <code>encode_range_bits</code> is described in <a href="#range-proof" class="auto internal xref">Section 3.4</a>.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
+<p id="section-3.2-5">The encoded information is not included in the output share
 that is submitted for aggregation.
-That is, the <code>truncate()</code> function emits only the core measurements.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
-<div class="lang-python sourcecode" id="section-3.2-5">
+That is, the <code>truncate()</code> function emits only the core measurements.<a href="#section-3.2-5" class="pilcrow">¶</a></p>
+<div class="lang-python sourcecode" id="section-3.2-6">
 <pre>
 def truncate(self, meas: list[F]) -&gt; list[F]:
     return [
-       self.field.decode_from_bit_vec(m)
+       self.field.decode_range_bits(m, self.max_value)
        for m in chunks(meas, self.bits)
     ]
-</pre><a href="#section-3.2-5" class="pilcrow">¶</a>
+</pre><a href="#section-3.2-6" class="pilcrow">¶</a>
 </div>
-<p id="section-3.2-6">This uses a <code>chunks(v, c)</code> function that takes a list of values, <code>v</code>,
+<p id="section-3.2-7">This uses a <code>chunks(v, c)</code> function that takes a list of values, <code>v</code>,
 and a chunk length, <code>c</code>,
 to split <code>v</code> into multiple lists from <code>v</code>,
-where each chunk has a length <code>c</code>.<a href="#section-3.2-6" class="pilcrow">¶</a></p>
-<p id="section-3.2-7">The <code>decode()</code> function is therefore identical to that in Prio3SumVec.<a href="#section-3.2-7" class="pilcrow">¶</a></p>
-<div class="lang-python sourcecode" id="section-3.2-8">
+where each chunk has a length <code>c</code>.<a href="#section-3.2-7" class="pilcrow">¶</a></p>
+<p id="section-3.2-8">The <code>decode()</code> function is therefore identical to that in Prio3SumVec.<a href="#section-3.2-8" class="pilcrow">¶</a></p>
+<div class="lang-python sourcecode" id="section-3.2-9">
 <pre>
 def decode(self, output: list[F], _count) -&gt; list[int]:
     return [x.int() for x in output]
-</pre><a href="#section-3.2-8" class="pilcrow">¶</a>
+</pre><a href="#section-3.2-9" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -1360,24 +1372,26 @@ def decode(self, output: list[F], _count) -&gt; list[int]:
         </h3>
 <p id="section-3.3-1">The validity circuit for Prio3L1BoundSum uses an extended version
 of the validity circuit used by Prio3SumVec,
-see <span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-15#section-7.4.3" class="relref">Section 7.4.3</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
+see <span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-17#section-7.4.3" class="relref">Section 7.4.3</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
 <p id="section-3.3-2">The encoded measurement is checked
 to ensure that every component of the vector –
 plus the added L1 norm –
 is encoded in the specified number of bits.
 That is, the circuit checks that each component has a value between
-0 (inclusive) and 2<sup><code>bits</code></sup> (exclusive)
-by checking that each of the first "<code>bits</code>" bits of the value
-are either zero or one.
+0 (inclusive) and <code>max_value</code> (exclusive)
+by first checking the value is correctly composed from bits,
+where each bit is either zero or one.
 This process is identical to the Prio3SumVec check,
 except that one additional value is checked.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
 <p id="section-3.3-3">The validity circuit then checks whether the added L1 norm value
 is consistent with the encoded vector elements.
 The L1 norm is checked by decoding the measurement values,
-including the encoded L1 norm,
-recomputing the L1 norm as the sum of the individual components, and
-subtracting the reported and computed values
-to confirm that they are identical.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
+including the L1 norm
+that uses the encoding described in <a href="#range-proof" class="auto internal xref">Section 3.4</a>.
+The decoded values are used to recompute the L1 norm
+as the sum of the individual components.
+The difference between reported and computed values
+is checked to confirm that the values are identical.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
 <p id="section-3.3-4">The complete circuit is specified in <a href="#fig-eval" class="auto internal xref">Figure 1</a>.<a href="#section-3.3-4" class="pilcrow">¶</a></p>
 <span id="name-evaluation-function-for-pri"></span><div id="fig-eval">
 <figure id="figure-1">
@@ -1385,7 +1399,8 @@ to confirm that they are identical.<a href="#section-3.3-3" class="pilcrow">¶</
 <pre>
 def eval(self, meas: list[F],
          joint_rand: list[F], num_shares: int) -&gt; list[F]:
-    assert len(meas) == (self.length + 1) * self.bits
+    bits = self.max_value.bit_length()
+    assert len(meas) == (self.length + 1) * bits
     shares_inv = self.field(num_shares).inv()
     parallel_sum = ParallelSum(Mul(), chunk_length)
 
@@ -1403,12 +1418,15 @@ def eval(self, meas: list[F],
             ]
         range_check += parallel_sum.eval(self.field, inputs)
 
+    c = chunks(meas, bits)
     components = [
         self.field.decode_from_bit_vec(m)
-        for m in chunks(meas, self.bits)
+        for m in c[:self.length]
     ]
-    observed_weight = sum(components[:self.length])
-    claimed_weight = components[self.length]
+    observed_weight = sum(components)
+    claimed_weight = self.field.decode_range_bits(
+      c[self.length], self.max_value
+    )
     weight_check = observed_weight - claimed_weight
 
     return [range_check, weight_check]
@@ -1418,6 +1436,71 @@ def eval(self, meas: list[F],
 <a href="#name-evaluation-function-for-pri" class="selfRef">Evaluation function for Prio3L1BoundSum</a>
           </figcaption></figure>
 </div>
+<p id="section-3.3-6">This evaluation uses the <code>decode_range_bits()</code> function
+for the encoded L1 norm,
+which is described in <a href="#range-proof" class="auto internal xref">Section 3.4</a>.<a href="#section-3.3-6" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="range-proof">
+<section id="section-3.4">
+        <h3 id="name-range-proof-encoding-and-de">
+<a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-range-proof-encoding-and-de" class="section-name selfRef">Range Proof Encoding and Decoding</a>
+        </h3>
+<p id="section-3.4-1">The validation of the L1 norm depends on an encoding
+that can be input to a range proof in the form:<a href="#section-3.4-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3.4-2">
+<pre>
+x = sum([ 2**i * b[i] for i in range(0, bits - 1) ])
+    + (max_value - 2**(bits - 1)) * b[bits - 1]
+</pre><a href="#section-3.4-2" class="pilcrow">¶</a>
+</div>
+<p id="section-3.4-3">That is, the sum of the corresponding power of two
+for each bit that is set in the encoding, except for the last.
+For the last bit, the value is reduced to the difference
+between <code>max_value</code> and largest power of two less than <code>max_value</code>
+(alternatively, the next power of two in sequence).<a href="#section-3.4-3" class="pilcrow">¶</a></p>
+<p id="section-3.4-4">This encoding function can be implemented in multiple ways,
+as there are multiple combinations of bit values
+that can satisfy the test
+unless <code>max_value</code> is an integer power of two
+(where there is just one encoding for each value).
+One possible implementation is:<a href="#section-3.4-4" class="pilcrow">¶</a></p>
+<div class="lang-python sourcecode" id="section-3.4-5">
+<pre>
+def encode_range_bits(cls, x: int, max_value: int) -&gt; list[Self]:
+    simple_bits = max_value.bit_length() - 1
+    overflow_bit = 2**simple_bits
+    last_bit = x &gt;= overflow_bit
+    encoded = cls.encode_into_bit_vec(
+      x - (max_value - overflow_bit) if last_bit else x,
+      simple_bits
+    )
+    encoded.append(cls(1 if last_bit else 0))
+    return encoded
+</pre><a href="#section-3.4-5" class="pilcrow">¶</a>
+</div>
+<p id="section-3.4-6">If <code>max_value</code> is a whole power of two,
+the following invocations produce the same output:<a href="#section-3.4-6" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-3.4-7">
+<pre>
+field.encode_into_bit_vec(v, max_value.bit_length())
+field.encode_range_bits(v, max_value)
+</pre><a href="#section-3.4-7" class="pilcrow">¶</a>
+</div>
+<p id="section-3.4-8">The resulting value can be decoded using:<a href="#section-3.4-8" class="pilcrow">¶</a></p>
+<div class="lang-python sourcecode" id="section-3.4-9">
+<pre>
+def decode_range_bits(cls, v: list[Self], max_value: int) -&gt; Self:
+    if cls.MODULUS &lt; max_value:
+      raise ValueError("max_value is too large")
+    decoded = cls.decode_from_bit_vec(v[:-1])
+    decoded += list[-1] * (max_value - 2**(len(v) - 1))
+    return decoded
+</pre><a href="#section-3.4-9" class="pilcrow">¶</a>
+</div>
+<p id="section-3.4-10">As above, this decoding function
+is identical to <code>decode_from_bit_vec()</code>
+when <code>max_value</code> is an integer power of two.<a href="#section-3.4-10" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1429,7 +1512,7 @@ def eval(self, meas: list[F],
       </h2>
 <p id="section-4-1">The Prio3L1BoundSum VDAF is subject to the same considerations
 as other Prio-based VDAFs.
-These considerations are detailed in <span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-15#section-9" class="relref">Section 9</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>.<a href="#section-4-1" class="pilcrow">¶</a></p>
+These considerations are detailed in <span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-17#section-9" class="relref">Section 9</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <p id="section-4-2">In particular, this instantiation uses Field128 to ensure robustness
 despite the use of joint randomness in proofs.
 Joint randomness increases the risk of an attacker finding
@@ -1445,7 +1528,7 @@ of finding such a combination.<a href="#section-4-2" class="pilcrow">¶</a></p>
       </h2>
 <p id="section-5-1">This document registers a codepoint for Prio3L1BoundSum
 in the "Verifiable Distributed Aggregation Functions (VDAF)" registry
-as defined by <span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-15#section-10" class="relref">Section 10</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>.
+as defined by <span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-17#section-10" class="relref">Section 10</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>.
 This entry contains the following fields:<a href="#section-5-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-5-2">
         <dt id="section-5-2.1">Value:</dt>
@@ -1492,7 +1575,7 @@ This entry contains the following fields:<a href="#section-5-1" class="pilcrow">
 <dd class="break"></dd>
 <dt id="VDAF">[VDAF]</dt>
       <dd>
-<span class="refAuthor">Barnes, R.</span>, <span class="refAuthor">Cook, D.</span>, <span class="refAuthor">Patton, C.</span>, and <span class="refAuthor">P. Schoppmann</span>, <span class="refTitle">"Verifiable Distributed Aggregation Functions"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-vdaf-15</span>, <time datetime="2025-06-17" class="refDate">17 June 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-15">https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-15</a>&gt;</span>. </dd>
+<span class="refAuthor">Barnes, R.</span>, <span class="refAuthor">Cook, D.</span>, <span class="refAuthor">Patton, C.</span>, and <span class="refAuthor">P. Schoppmann</span>, <span class="refTitle">"Verifiable Distributed Aggregation Functions"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-irtf-cfrg-vdaf-17</span>, <time datetime="2025-10-17" class="refDate">17 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-17">https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-17</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
