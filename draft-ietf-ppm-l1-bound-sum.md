@@ -57,7 +57,7 @@ where the sum of the values in the contribution is less than a chosen value.
 # Introduction
 
 Existing Prio instantiations of a Verifiable Distributed Aggregation Function (VDAF)
-{{!VDAF=I-D.irtf-cfrg-vdaf-15}}
+{{!VDAF=I-D.irtf-cfrg-vdaf-17}}
 all support a simple summation of measurements.
 From Prio3Count ({{Section 7.4.1 of VDAF}}),
 which adds measurements containing a single one or a zero value,
@@ -73,10 +73,7 @@ An L1 bound limits that sum to some maximum.
 
 This document defines the Prio3L1BoundSum instantiation.
 This instantiation limits the L1 norm of a vector or histogram
-to a value that is one less than a chosen power of 2,
-or 2<sup>n</sup>-1.
-This choice significantly reduces the size of the encoding
-relative to a more flexible limit.
+to a value less than a predetermined maximum.
 
 This instantiation has similarities with other instantiations.
 Unlike Prio3Histogram ({{Section 7.4.4 of VDAF}}),
@@ -95,28 +92,38 @@ as long as their sum is within that bound.
 
 {::boilerplate bcp14-tagged}
 
-This document uses the terminology and functions defined in {{Section 2 of VDAF}}.
+This document uses the terminology, notation conventions, and functions
+defined in {{Section 2 of VDAF}}.
 
 
 # Prio3L1BoundSum Definition {#def}
 
 The Prio3L1BoundSum instantiation of Prio {{CGB17}}
 supports the addition of a vector of integers.
+It also uses `bit_length()`,
+which returns the minimum number of bits
+needed to encode an integer value.
 
 The instantiation is summarized in {{table-l1-bound-sum}}.
 
 | Parameter | Value |
 |:-|:-|
 | field | Field128 ({{Section 6.1.2 of VDAF}}) |
-| Valid | L1BoundSum(field, length, bits, chunk_length) |
+| Valid | L1BoundSum(field, length, max, chunk_length) |
 | PROOFS | 1 |
 | XOF | XofTurboShake128 ({{Section 6.2.1 of VDAF}}) |
 {: #table-l1-bound-sum title="Prio3L1BoundSum Parameters"}
 
 The function takes three parameters:
-`length`, `bits`, and `chunk_length`.
+`length`, `max_value`, and `chunk_length`.
 The vector contains "`length`" components,
-each of which is a non-negative integer less than 2<sup>`bits`</sup>.
+each of which is a non-negative integer less than `max_value`.
+
+The value of `max_value` can be any non-negative integer
+greater than 1.
+A value of 2 causes Prio3L1BoundSum
+to be nearly identical to Prio3Histogram,
+except that Prio3Histogram cannot encode an all-zero report.
 
 
 ## Chunk Length Selection
@@ -126,7 +133,9 @@ in approximately the same way as for Prio3SumVec,
 as detailed in {{Section 7.4.3.1 of VDAF}}.
 The difference is that Prio3L1BoundSum involves validation of
 `bits * (length + 1)` values,
-which might increase the most efficient value for `chunk_length`.
+where `bits = max_value.bit_length()`.
+This might increase the most efficient value for `chunk_length`
+relative to a similar encoding of Prio3SumVec.
 
 
 ## Encoding and Decoding
@@ -138,23 +147,26 @@ of the L1 norm (the sum of the vector components) to the encoding:
 def encode(self, measurement: list[int]) -> list[F]:
     encoded = []
     weight = self.field(0)
+    bits = self.max_value.bit_length()
     for v in measurement:
         weight += v
-        encoded += self.field.encode_into_bit_vec(v, self.bits)
-    w_bits = self.field.encode_into_bit_vec(weight, self.bits)
+        encoded += self.field.encode_into_bit_vec(v, bits)
+    w_bits = self.field.encode_range_bits(weight, self.max_value)
     return encoded + w_bits
 ~~~
 
 The encoded measurement has a total length of `(length + 1) * bits`.
 
-This extra information is not included in the output share
+The encoding function `encode_range_bits` is described in {{range-proof}}.
+
+The encoded information is not included in the output share
 that is submitted for aggregation.
 That is, the `truncate()` function emits only the core measurements.
 
 ~~~ python
 def truncate(self, meas: list[F]) -> list[F]:
     return [
-       self.field.decode_from_bit_vec(m)
+       self.field.decode_range_bits(m, self.max_value)
        for m in chunks(meas, self.bits)
     ]
 ~~~
@@ -183,26 +195,29 @@ to ensure that every component of the vector –
 plus the added L1 norm –
 is encoded in the specified number of bits.
 That is, the circuit checks that each component has a value between
-0 (inclusive) and 2<sup>`bits`</sup> (exclusive)
-by checking that each of the first "`bits`" bits of the value
-are either zero or one.
+0 (inclusive) and `max_value` (exclusive)
+by first checking the value is correctly composed from bits,
+where each bit is either zero or one.
 This process is identical to the Prio3SumVec check,
 except that one additional value is checked.
 
 The validity circuit then checks whether the added L1 norm value
 is consistent with the encoded vector elements.
 The L1 norm is checked by decoding the measurement values,
-including the encoded L1 norm,
-recomputing the L1 norm as the sum of the individual components, and
-subtracting the reported and computed values
-to confirm that they are identical.
+including the L1 norm
+that uses the encoding described in {{range-proof}}.
+The decoded values are used to recompute the L1 norm
+as the sum of the individual components.
+The difference between reported and computed values
+is checked to confirm that the values are identical.
 
 The complete circuit is specified in {{fig-eval}}.
 
 ~~~ python
 def eval(self, meas: list[F],
          joint_rand: list[F], num_shares: int) -> list[F]:
-    assert len(meas) == (self.length + 1) * self.bits
+    bits = self.max_value.bit_length()
+    assert len(meas) == (self.length + 1) * bits
     shares_inv = self.field(num_shares).inv()
     parallel_sum = ParallelSum(Mul(), chunk_length)
 
@@ -220,17 +235,84 @@ def eval(self, meas: list[F],
             ]
         range_check += parallel_sum.eval(self.field, inputs)
 
+    c = chunks(meas, bits)
     components = [
         self.field.decode_from_bit_vec(m)
-        for m in chunks(meas, self.bits)
+        for m in c[:self.length]
     ]
-    observed_weight = sum(components[:self.length])
-    claimed_weight = components[self.length]
+    observed_weight = sum(components)
+    claimed_weight = self.field.decode_range_bits(
+      c[self.length], self.max_value
+    )
     weight_check = observed_weight - claimed_weight
 
     return [range_check, weight_check]
 ~~~
 {: #fig-eval title="Evaluation function for Prio3L1BoundSum"}
+
+This evaluation uses the `decode_range_bits()` function
+for the encoded L1 norm,
+which is described in {{range-proof}}.
+
+
+## Range Proof Encoding and Decoding {#range-proof}
+
+The validation of the L1 norm depends on an encoding
+that can be input to a range proof in the form:
+
+~~~
+x = sum([ 2**i * b[i] for i in range(0, bits - 1) ])
+    + (max_value - 2**(bits - 1)) * b[bits - 1]
+~~~
+
+That is, the sum of the corresponding power of two
+for each bit that is set in the encoding, except for the last.
+For the last bit, the value is reduced to the difference
+between `max_value` and largest power of two less than `max_value`
+(alternatively, the next power of two in sequence).
+
+This encoding function can be implemented in multiple ways,
+as there are multiple combinations of bit values
+that can satisfy the test
+unless `max_value` is an integer power of two
+(where there is just one encoding for each value).
+One possible implementation is:
+
+~~~ python
+def encode_range_bits(cls, x: int, max_value: int) -> list[Self]:
+    simple_bits = max_value.bit_length() - 1
+    overflow_bit = 2**simple_bits
+    last_bit = x >= overflow_bit
+    encoded = cls.encode_into_bit_vec(
+      x - (max_value - overflow_bit) if last_bit else x,
+      simple_bits
+    )
+    encoded.append(cls(1 if last_bit else 0))
+    return encoded
+~~~
+
+If `max_value` is a whole power of two,
+the following invocations produce the same output:
+
+~~~
+field.encode_into_bit_vec(v, max_value.bit_length())
+field.encode_range_bits(v, max_value)
+~~~
+
+The resulting value can be decoded using:
+
+~~~ python
+def decode_range_bits(cls, v: list[Self], max_value: int) -> Self:
+    if cls.MODULUS < max_value:
+      raise ValueError("max_value is too large")
+    decoded = cls.decode_from_bit_vec(v[:-1])
+    decoded += list[-1] * (max_value - 2**(len(v) - 1))
+    return decoded
+~~~
+
+As above, this decoding function
+is identical to `decode_from_bit_vec()`
+when `max_value` is an integer power of two.
 
 
 # Security Considerations
