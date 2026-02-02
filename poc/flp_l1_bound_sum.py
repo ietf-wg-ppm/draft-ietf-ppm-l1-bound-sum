@@ -22,7 +22,7 @@ class L1BoundSum(Valid[list[int], list[int], F]):
     def __init__(self, field: type[F], length: int, max_value: int, chunk_length: int):
         """
         Instantiate the `L1BoundSum` circuit for measurements with
-        `length` elements, each in the range `[0, max_value)`, and with
+        `length` elements, each in the range `[0, max_value]`, and with
         a maximum L1 norm in the same range.
         """
         self.field = field

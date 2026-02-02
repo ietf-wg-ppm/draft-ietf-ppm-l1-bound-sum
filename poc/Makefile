@@ -27,7 +27,8 @@ validate: $(python) lint
 	$(python) -m unittest
 	@target=$$(mktemp -d); \
 	  TEST_VECTOR_PATH="$$target" $(python) gen_test_vec.py && \
-	  diff -u "$(TEST_VEC_DIR)/$(TEST_VEC_FILE)" "$$target/$(TEST_VEC_FILE)"
+	  diff -u "$(TEST_VEC_DIR)/$(TEST_VEC_FILE)" "$$target/$(TEST_VEC_FILE)"; \
+	  rm -rf "$$target"
 
 lint: $(black)
 	$(black) --diff .
