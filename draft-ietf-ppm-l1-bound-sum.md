@@ -34,6 +34,7 @@ author:
     email: "divergentdave@gmail.com"
 
 normative:
+  VDAF: I-D.irtf-cfrg-vdaf
 
 informative:
   CGB17:
@@ -57,7 +58,7 @@ where the sum of the values in the contribution is less than a chosen value.
 # Introduction
 
 Existing Prio instantiations of a Verifiable Distributed Aggregation Function (VDAF)
-{{!VDAF=I-D.irtf-cfrg-vdaf-17}}
+{{VDAF}}
 all support a simple summation of measurements.
 From Prio3Count ({{Section 7.4.1 of VDAF}}),
 which adds measurements containing a single one or a zero value,
@@ -146,18 +147,17 @@ of the L1 norm (the sum of the vector components) to the encoding:
 ~~~ python
 def encode(self, measurement: list[int]) -> list[F]:
     encoded = []
-    weight = self.field(0)
-    bits = self.max_value.bit_length()
+    erci = encode_range_checked_int
     for v in measurement:
-        weight += v
-        encoded += self.field.encode_into_bit_vec(v, bits)
-    w_bits = self.field.encode_range_bits(weight, self.max_value)
-    return encoded + w_bits
+        encoded += erci(self.field, v, self.max_value)
+    weight = erci(self.field, sum(measurement), self.max_value)
+    return encoded + weight
 ~~~
 
 The encoded measurement has a total length of `(length + 1) * bits`.
 
-The encoding function `encode_range_bits` is described in {{range-proof}}.
+The encoding function `encode_range_checked_int`
+is described in {{Section 7.4.2 of VDAF}}.
 
 The encoded information is not included in the output share
 that is submitted for aggregation.
@@ -166,8 +166,8 @@ That is, the `truncate()` function emits only the core measurements.
 ~~~ python
 def truncate(self, meas: list[F]) -> list[F]:
     return [
-       self.field.decode_range_bits(m, self.max_value)
-       for m in chunks(meas, self.bits)
+       decode_range_checked_int(self.field, m, self.max_value)
+       for m in chunks(meas, self.max_value.bit_length())
     ]
 ~~~
 
@@ -204,8 +204,7 @@ except that one additional value is checked.
 The validity circuit then checks whether the added L1 norm value
 is consistent with the encoded vector elements.
 The L1 norm is checked by decoding the measurement values,
-including the L1 norm
-that uses the encoding described in {{range-proof}}.
+including the L1 norm.
 The decoded values are used to recompute the L1 norm
 as the sum of the individual components.
 The difference between reported and computed values
@@ -237,12 +236,12 @@ def eval(self, meas: list[F],
 
     c = chunks(meas, bits)
     components = [
-        self.field.decode_from_bit_vec(m)
+        decode_range_checked_int(self,field, m, self.max_value)
         for m in c[:self.length]
     ]
     observed_weight = sum(components)
-    claimed_weight = self.field.decode_range_bits(
-      c[self.length], self.max_value
+    claimed_weight = decode_range_checked_int(
+        self.field, c[self.length], self.max_value
     )
     weight_check = observed_weight - claimed_weight
 
@@ -250,69 +249,8 @@ def eval(self, meas: list[F],
 ~~~
 {: #fig-eval title="Evaluation function for Prio3L1BoundSum"}
 
-This evaluation uses the `decode_range_bits()` function
-for the encoded L1 norm,
-which is described in {{range-proof}}.
-
-
-## Range Proof Encoding and Decoding {#range-proof}
-
-The validation of the L1 norm depends on an encoding
-that can be input to a range proof in the form:
-
-~~~
-x = sum([ 2**i * b[i] for i in range(0, bits - 1) ])
-    + (max_value - 2**(bits - 1)) * b[bits - 1]
-~~~
-
-That is, the sum of the corresponding power of two
-for each bit that is set in the encoding, except for the last.
-For the last bit, the value is reduced to the difference
-between `max_value` and largest power of two less than `max_value`
-(alternatively, the next power of two in sequence).
-
-This encoding function can be implemented in multiple ways,
-as there are multiple combinations of bit values
-that can satisfy the test
-unless `max_value` is an integer power of two
-(where there is just one encoding for each value).
-One possible implementation is:
-
-~~~ python
-def encode_range_bits(cls, x: int, max_value: int) -> list[Self]:
-    simple_bits = max_value.bit_length() - 1
-    overflow_bit = 2**simple_bits
-    last_bit = x >= overflow_bit
-    encoded = cls.encode_into_bit_vec(
-      x - (max_value - overflow_bit) if last_bit else x,
-      simple_bits
-    )
-    encoded.append(cls(1 if last_bit else 0))
-    return encoded
-~~~
-
-If `max_value` is a whole power of two,
-the following invocations produce the same output:
-
-~~~
-field.encode_into_bit_vec(v, max_value.bit_length())
-field.encode_range_bits(v, max_value)
-~~~
-
-The resulting value can be decoded using:
-
-~~~ python
-def decode_range_bits(cls, v: list[Self], max_value: int) -> Self:
-    if cls.MODULUS < max_value:
-      raise ValueError("max_value is too large")
-    decoded = cls.decode_from_bit_vec(v[:-1])
-    decoded += list[-1] * (max_value - 2**(len(v) - 1))
-    return decoded
-~~~
-
-As above, this decoding function
-is identical to `decode_from_bit_vec()`
-when `max_value` is an integer power of two.
+This evaluation uses the `decode_range_checked_int()` function
+defined in {{Section 7.4.2 of VDAF}}.
 
 
 # Security Considerations
