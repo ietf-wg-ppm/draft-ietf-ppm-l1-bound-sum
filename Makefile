@@ -13,3 +13,13 @@ else
 	    https://github.com/martinthomson/i-d-template $(LIBDIR)
 endif
 endif
+
+.PHONY: validate
+validate:
+	$(MAKE) -C poc validate
+
+lint::
+	$(MAKE) -C poc lint
+
+fix-lint::
+	$(MAKE) -C poc fix-lint

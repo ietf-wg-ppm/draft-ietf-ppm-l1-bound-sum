@@ -14,8 +14,8 @@ class Prio3L1BoundSum(Prio3[list[int], list[int], Field128]):
     # Name of the VDAF, for use in test vector filenames.
     test_vec_name = "Prio3L1BoundSum"
 
-    def __init__(self, shares: int, length: int, bits: int, chunk_length: int):
+    def __init__(self, shares: int, length: int, max_value: int, chunk_length: int):
         flp = FlpBBCGGI19[list[int], list[int], Field128](
-            L1BoundSum(Field128, length, bits, chunk_length)
+            L1BoundSum(Field128, length, max_value, chunk_length)
         )
         super().__init__(shares, flp, 1)
