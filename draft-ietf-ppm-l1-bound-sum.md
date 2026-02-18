@@ -35,6 +35,7 @@ author:
 
 normative:
   VDAF: I-D.irtf-cfrg-vdaf
+  DAP: I-D.ietf-ppm-dap
 
 informative:
   CGB17:
@@ -251,6 +252,43 @@ def eval(self, meas: list[F],
 
 This evaluation uses the `decode_range_checked_int()` function
 defined in {{Section 7.4.2 of VDAF}}.
+
+
+# DAP Integration
+
+The integration of Prio3L1BoundSum in DAP {{DAP}}
+requires the definition of an encoding
+for the configuration of the VDAF.
+{{fig-config}} defines the encoding of `Prio3L1BoundSumConfig`,
+using the syntax definitions from {{Section 3 of RFC8446}}.
+
+~~~ tls-presentation
+struct {
+  uint32 length;
+  uint32 max_value;
+  uint32 chunk_length;
+} Prio3L1BoundSumConfig;
+~~~
+{: #fig-config title="VDAF Configuration Encoding for Prio3L1BoundSum"}
+
+This configuration is three 32-bit integers,
+each in network byte order,
+with semantics described in {{def}},
+as follows:
+
+length:
+
+: The total number of values in each measurement.
+
+max_value:
+
+: The maximum value, inclusive,
+  for the sum of all measurement values.
+
+chunk_length:
+
+: The size of each chunk used in the evaluation circuit;
+  see {{fig-eval}}.
 
 
 # Security Considerations
