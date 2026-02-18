@@ -260,7 +260,7 @@ The integration of Prio3L1BoundSum in DAP {{DAP}}
 requires the definition of an encoding
 for the configuration of the VDAF.
 {{fig-config}} defines the encoding of `Prio3L1BoundSumConfig`,
-using the syntax definitions from {{Section 3 of RFC8446}}.
+using the syntax definitions from {{Section 3 of !RFC8446}}.
 
 ~~~ tls-presentation
 struct {
