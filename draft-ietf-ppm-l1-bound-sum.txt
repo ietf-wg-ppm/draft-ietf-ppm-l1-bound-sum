@@ -5,8 +5,8 @@
 Privacy Preserving Measurement                                M. Thomson
 Internet-Draft                                                   Mozilla
 Intended status: Standards Track                                 D. Cook
-Expires: 5 February 2026                                            ISRG
-                                                           4 August 2025
+Expires: 22 August 2026                                             ISRG
+                                                        18 February 2026
 
 
      A Prio Instantiation for Vector Sums with an L1 Norm Bound on
@@ -23,10 +23,10 @@ About This Document
 
    This note is to be removed before publishing as an RFC.
 
-   The latest revision of this draft can be found at
-   https://martinthomson.github.io/prio-l1-bound-sum/draft-thomson-ppm-
-   l1-bound-sum.html.  Status information for this document may be found
-   at https://datatracker.ietf.org/doc/draft-ietf-ppm-l1-bound-sum/.
+   The latest revision of this draft can be found at https://ietf-wg-
+   ppm.github.io/draft-ietf-ppm-l1-bound-sum/draft-ietf-ppm-l1-bound-
+   sum.html.  Status information for this document may be found at
+   https://datatracker.ietf.org/doc/draft-ietf-ppm-l1-bound-sum/.
 
    Discussion of this document takes place on the Privacy Preserving
    Measurement Working Group mailing list (mailto:ppm@ietf.org), which
@@ -34,7 +34,7 @@ About This Document
    Subscribe at https://www.ietf.org/mailman/listinfo/ppm/.
 
    Source for this draft and an issue tracker can be found at
-   https://github.com/martinthomson/prio-l1-bound-sum.
+   https://github.com/ietf-wg-ppm/draft-ietf-ppm-l1-bound-sum.
 
 Status of This Memo
 
@@ -51,11 +51,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 February 2026.
+   This Internet-Draft will expire on 22 August 2026.
 
 Copyright Notice
 
-   Copyright (c) 2025 IETF Trust and the persons identified as the
+   Copyright (c) 2026 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
