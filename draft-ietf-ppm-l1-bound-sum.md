@@ -20,8 +20,8 @@ venue:
   type: "Working Group"
   mail: "ppm@ietf.org"
   arch: "https://mailarchive.ietf.org/arch/browse/ppm/"
-  github: "martinthomson/prio-l1-bound-sum"
-  latest: "https://martinthomson.github.io/prio-l1-bound-sum/draft-thomson-ppm-l1-bound-sum.html"
+  github: "ietf-wg-ppm/draft-ietf-ppm-l1-bound-sum"
+  latest: "https://ietf-wg-ppm.github.io/draft-ietf-ppm-l1-bound-sum/draft-ietf-ppm-l1-bound-sum.html"
 
 author:
  -
