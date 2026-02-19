@@ -5,8 +5,8 @@
 Privacy Preserving Measurement                                M. Thomson
 Internet-Draft                                                   Mozilla
 Intended status: Standards Track                                 D. Cook
-Expires: 22 August 2026                                             ISRG
-                                                        18 February 2026
+Expires: 23 August 2026                                             ISRG
+                                                        19 February 2026
 
 
      A Prio Instantiation for Vector Sums with an L1 Norm Bound on
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 August 2026.
+   This Internet-Draft will expire on 23 August 2026.
 
 Copyright Notice
 
