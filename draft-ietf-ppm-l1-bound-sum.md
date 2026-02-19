@@ -74,7 +74,7 @@ An L1 bound limits that sum to some maximum.
 
 This document defines the Prio3L1BoundSum instantiation.
 This instantiation limits the L1 norm of a vector or histogram
-to a value less than a predetermined maximum.
+to a value less than or equal to a predetermined maximum.
 
 This instantiation has similarities with other instantiations.
 Unlike Prio3Histogram ({{Section 7.4.4 of VDAF}}),
@@ -118,11 +118,10 @@ The instantiation is summarized in {{table-l1-bound-sum}}.
 The function takes three parameters:
 `length`, `max_value`, and `chunk_length`.
 The vector contains "`length`" components,
-each of which is a non-negative integer less than `max_value`.
+each of which is a non-negative integer less than or equal to `max_value`.
 
-The value of `max_value` can be any non-negative integer
-greater than 1.
-A value of 2 causes Prio3L1BoundSum
+The value of `max_value` can be any positive integer.
+A value of 1 causes Prio3L1BoundSum
 to be nearly identical to Prio3Histogram,
 except that Prio3Histogram cannot encode an all-zero report.
 
