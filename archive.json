@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-10T02:28:38.339275+00:00",
+  "timestamp": "2026-02-19T01:13:44.807899+00:00",
   "repo": "ietf-wg-ppm/draft-ietf-ppm-l1-bound-sum",
   "labels": [
     {
@@ -129,6 +129,22 @@
           "updatedAt": "2025-07-28T22:02:29Z"
         }
       ]
+    },
+    {
+      "number": 14,
+      "id": "I_kwDOM-k-FM7bjAXO",
+      "title": "Make range check more flexible",
+      "url": "https://github.com/ietf-wg-ppm/draft-ietf-ppm-l1-bound-sum/issues/14",
+      "state": "CLOSED",
+      "author": "divergentdave",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "We should adopt the changes made in cfrg/draft-irtf-cfrg-vdaf#549 in this VDAF as well. This will let us pick any L1 bound, not just 2^n-1, without any increase to report sizes.",
+      "createdAt": "2025-12-02T00:05:54Z",
+      "updatedAt": "2026-02-19T00:41:02Z",
+      "closedAt": "2026-02-19T00:41:02Z",
+      "comments": []
     }
   ],
   "pulls": [
@@ -619,6 +635,193 @@
           "body": "",
           "createdAt": "2025-07-30T09:37:34Z",
           "updatedAt": "2025-07-30T09:37:34Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "id": "PR_kwDOM-k-FM68nyWi",
+      "title": "Add more flexible range proof",
+      "url": "https://github.com/ietf-wg-ppm/draft-ietf-ppm-l1-bound-sum/pull/15",
+      "state": "MERGED",
+      "author": "martinthomson",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "I'm not at all confident in this, but I am enough to do a bad job of hacking it together.\r\n\r\nBTW, I REALLY don't understand the Prio3Histogram equivalent of this range check.  There, you want to ensure that sum(measurements) is 1. So I might have expected `sum(m) - 1`, matching this check. The actual, of `sum(m + [-inv(length)])`, is baffling. This will end up being one higher than the inverse of the number of buckets.  That's not a useful value, at least as far as I can tell. So I'm once again not clear on the overall synthesis here, because this should be very close to Prio3Histogram for `max_value` of 2.",
+      "createdAt": "2026-01-12T05:22:32Z",
+      "updatedAt": "2026-02-19T00:41:01Z",
+      "baseRepository": "ietf-wg-ppm/draft-ietf-ppm-l1-bound-sum",
+      "baseRefName": "main",
+      "baseRefOid": "e36453db0d6fbf50a56524d0ae8a94e3017698a1",
+      "headRepository": "ietf-wg-ppm/draft-ietf-ppm-l1-bound-sum",
+      "headRefName": "range-proof",
+      "headRefOid": "d7a53e6f851ee0c80a921bd3bee3afb224d14f5b",
+      "closedAt": "2026-02-19T00:41:01Z",
+      "mergedAt": "2026-02-19T00:41:01Z",
+      "mergedBy": "martinthomson",
+      "mergeCommit": {
+        "oid": "52e79b7080ba0d8cf2f7aabdca5afacded96ef48"
+      },
+      "comments": [
+        {
+          "author": "divergentdave",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The `shares_inv` term in the Prio3Histogram circuit is effectively replacing subtraction by a constant one with subtraction by additive shares of one. We need each term of the circuit's output, or any gadget input wire, to be additively shared across the aggregators, so that when we add up the shares of the circuit output, (or input wire) we get the right result. For most terms, they include a share of a measurement element, or a share of a gadget output, optionally multiplied by a constant. This term includes neither, so we split the constant from the constant addition into shares instead. (We could instead have one aggregator add the constant and the other add zero, but having each add the same re-scaled constant simplifies implementation)",
+          "createdAt": "2026-01-12T14:28:07Z",
+          "updatedAt": "2026-01-12T14:28:07Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOM-k-FM7ZnrI_",
+          "commit": {
+            "abbreviatedOid": "3371ced"
+          },
+          "author": "divergentdave",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-12T14:29:48Z",
+          "updatedAt": "2026-01-12T14:29:49Z",
+          "comments": [
+            {
+              "originalPosition": 195,
+              "body": "I think we should hold off until VDAF draft-18 is cut, and then reference `encode_range_checked_int()` from it.",
+              "createdAt": "2026-01-12T14:29:48Z",
+              "updatedAt": "2026-01-12T14:29:49Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOM-k-FM7ZuNVn",
+          "commit": {
+            "abbreviatedOid": "3371ced"
+          },
+          "author": "martinthomson",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-01-12T21:14:42Z",
+          "updatedAt": "2026-01-12T21:14:42Z",
+          "comments": [
+            {
+              "originalPosition": 195,
+              "body": "I figured that would be better, but wanted to run the exercise.  Any ETA?",
+              "createdAt": "2026-01-12T21:14:42Z",
+              "updatedAt": "2026-01-12T21:14:42Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOM-k-FM7evW6x",
+          "commit": {
+            "abbreviatedOid": "e837a70"
+          },
+          "author": "martinthomson",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-02T01:20:49Z",
+          "updatedAt": "2026-02-02T01:23:42Z",
+          "comments": [
+            {
+              "originalPosition": 34,
+              "body": "```suggestion\n        `length` elements, each in the range `[0, max_value]`, and with\n```\n\nAn important fix.",
+              "createdAt": "2026-02-02T01:20:49Z",
+              "updatedAt": "2026-02-02T01:23:43Z"
+            },
+            {
+              "originalPosition": 30,
+              "body": "```suggestion\n\t  diff -u \"$(TEST_VEC_DIR)/$(TEST_VEC_FILE)\" \"$$target/$(TEST_VEC_FILE)\"; \\\n\t  rm -rf \"$$target\"\n```",
+              "createdAt": "2026-02-02T01:21:47Z",
+              "updatedAt": "2026-02-02T01:23:43Z"
+            },
+            {
+              "originalPosition": 152,
+              "body": "I'm wondering if we need to retain this assertion, or if the infrastructure can be assumed to check that the length of the input to this function matches the value of `Vdaf.MEAS_LEN`.  Does your core run that check?",
+              "createdAt": "2026-02-02T01:23:19Z",
+              "updatedAt": "2026-02-02T01:23:43Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOM-k-FM7j3Anz",
+          "commit": {
+            "abbreviatedOid": "eb7b5d5"
+          },
+          "author": "divergentdave",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-02-19T00:18:12Z",
+          "updatedAt": "2026-02-19T00:32:35Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "nit: This is a bit more precise description\n```suggestion\nto a value less than or equal to a predetermined maximum.\n```",
+              "createdAt": "2026-02-19T00:18:12Z",
+              "updatedAt": "2026-02-19T00:32:35Z"
+            },
+            {
+              "originalPosition": 62,
+              "body": "```suggestion\neach of which is a non-negative integer less than or equal to `max_value`.\n```",
+              "createdAt": "2026-02-19T00:21:27Z",
+              "updatedAt": "2026-02-19T00:32:35Z"
+            },
+            {
+              "originalPosition": 66,
+              "body": "These need to be updated to reflect that the `max_value` limit is inclusive.\n```suggestion\nThe value of `max_value` can be any positive integer.\nA value of 1 causes Prio3L1BoundSum\n```",
+              "createdAt": "2026-02-19T00:23:43Z",
+              "updatedAt": "2026-02-19T00:32:35Z"
+            },
+            {
+              "originalPosition": 152,
+              "body": "This is currently handled by the `Valid.check_valid_eval()` method, which we call at the top of each `eval()` implementation, but omit from the spec text. Thus, it would be good to keep this check here for now.",
+              "createdAt": "2026-02-19T00:29:50Z",
+              "updatedAt": "2026-02-19T00:32:35Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 16,
+      "id": "PR_kwDOM-k-FM7Ehkt1",
+      "title": "Define how this works with DAP",
+      "url": "https://github.com/ietf-wg-ppm/draft-ietf-ppm-l1-bound-sum/pull/16",
+      "state": "OPEN",
+      "author": "martinthomson",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Otherwise, this isn't much use.\r\n\r\nThis is pointed at #15.\r\n\r\nNote that this technically depends on dap-18 being complete, but we don't really depend on anything concrete there, so this doesn't really need to wait.",
+      "createdAt": "2026-02-18T05:17:11Z",
+      "updatedAt": "2026-02-19T00:49:13Z",
+      "baseRepository": "ietf-wg-ppm/draft-ietf-ppm-l1-bound-sum",
+      "baseRefName": "main",
+      "baseRefOid": "52e79b7080ba0d8cf2f7aabdca5afacded96ef48",
+      "headRepository": "ietf-wg-ppm/draft-ietf-ppm-l1-bound-sum",
+      "headRefName": "task-encoding",
+      "headRefOid": "d0e1b8ce8f405a99d35b6afd696ff35d80c64e00",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOM-k-FM7j3VWW",
+          "commit": {
+            "abbreviatedOid": "d0e1b8c"
+          },
+          "author": "divergentdave",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-02-19T00:49:13Z",
+          "updatedAt": "2026-02-19T00:49:13Z",
           "comments": []
         }
       ]
