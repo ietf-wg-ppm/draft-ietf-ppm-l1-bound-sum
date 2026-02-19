@@ -254,7 +254,7 @@ This evaluation uses the `decode_range_checked_int()` function
 defined in {{Section 7.4.2 of VDAF}}.
 
 
-# DAP Integration
+# DAP Integration {#dap}
 
 The integration of Prio3L1BoundSum in DAP {{DAP}}
 requires the definition of an encoding
