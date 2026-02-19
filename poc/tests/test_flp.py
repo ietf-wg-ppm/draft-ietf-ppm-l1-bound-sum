@@ -1,5 +1,5 @@
 from vdaf_poc.field import Field64, Field96, Field128, NttField
-from vdaf_poc.flp_bbcggi19 import FlpBBCGGI19
+from vdaf_poc.flp_bbcggi19 import FlpBBCGGI19, encode_range_checked_int
 from vdaf_poc.test_utils import TestFlpBBCGGI19
 
 from flp_l1_bound_sum import L1BoundSum
@@ -7,16 +7,17 @@ from flp_l1_bound_sum import L1BoundSum
 
 class TestL1BoundSum(TestFlpBBCGGI19):
     def run_encode_truncate_decode_with_ntt_fields_test(
-            self,
-            measurements: list[list[int]],
-            length: int,
-            bits: int,
-            chunk_length: int) -> None:
+        self,
+        measurements: list[list[int]],
+        length: int,
+        max_value: int,
+        chunk_length: int,
+    ) -> None:
         for field in [Field64, Field96, Field128]:
             l1boundsum = L1BoundSum[NttField](
                 field,
                 length,
-                bits,
+                max_value,
                 chunk_length,
             )
             self.assertEqual(l1boundsum.field, field)
@@ -27,7 +28,6 @@ class TestL1BoundSum(TestFlpBBCGGI19):
             )
 
     def test_with_fields(self) -> None:
-        # L1BoundSum with length = 4, bits = 3, chunk length = 3.
         self.run_encode_truncate_decode_with_ntt_fields_test(
             [
                 [7, 0, 0, 0],
@@ -37,13 +37,13 @@ class TestL1BoundSum(TestFlpBBCGGI19):
                 [5, 2, 0, 0],
                 [0, 0, 0, 0],
             ],
-            4,
-            3,
-            3,
+            length=4,
+            max_value=7,
+            chunk_length=3,
         )
 
     def test_valid(self) -> None:
-        valid = L1BoundSum(Field128, 4, 3, 3)
+        valid = L1BoundSum(Field128, 4, 7, 3)
         flp = FlpBBCGGI19(valid)
         self.run_flp_test(
             flp,
@@ -60,24 +60,24 @@ class TestL1BoundSum(TestFlpBBCGGI19):
     def test_invalid(self) -> None:
         field = Field128
         length = 4
-        bits = 3
-        valid = L1BoundSum(field, length, bits, 3)
+        max_value = 7
+        valid = L1BoundSum(field, length, max_value, 3)
         flp = FlpBBCGGI19(valid)
         self.run_flp_test(
             flp,
             [
                 (
-                    field.encode_into_bit_vec(7, bits)
-                    + field.encode_into_bit_vec(0, bits)
-                    + field.encode_into_bit_vec(0, bits)
-                    + field.encode_into_bit_vec(0, bits)
-                    + field.encode_into_bit_vec(6, bits),
+                    encode_range_checked_int(field, 7, max_value)
+                    + encode_range_checked_int(field, 0, max_value)
+                    + encode_range_checked_int(field, 0, max_value)
+                    + encode_range_checked_int(field, 0, max_value)
+                    + encode_range_checked_int(field, 6, max_value),
                     False,
                 ),
                 (
                     [field(2)]
                     + [field(0)] * 11
-                    + field.encode_into_bit_vec(2, bits),
+                    + encode_range_checked_int(field, 2, max_value),
                     False,
                 ),
                 (

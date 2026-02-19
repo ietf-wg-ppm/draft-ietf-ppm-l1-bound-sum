@@ -5,7 +5,7 @@ from vdaf_prio3_l1_bound_sum import Prio3L1BoundSum
 
 class TestPrio3SumVec(TestVdaf):
     def test(self) -> None:
-        prio3 = Prio3L1BoundSum(shares=2, length=4, bits=3, chunk_length=3)
+        prio3 = Prio3L1BoundSum(shares=2, length=4, max_value=7, chunk_length=3)
         measurements = [
             [7, 0, 0, 0],
             [0, 0, 0, 7],
