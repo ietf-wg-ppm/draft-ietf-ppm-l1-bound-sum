@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-19T01:13:44.807899+00:00",
+  "timestamp": "2026-02-22T01:12:28.386540+00:00",
   "repo": "ietf-wg-ppm/draft-ietf-ppm-l1-bound-sum",
   "labels": [
     {
@@ -791,24 +791,26 @@
       "id": "PR_kwDOM-k-FM7Ehkt1",
       "title": "Define how this works with DAP",
       "url": "https://github.com/ietf-wg-ppm/draft-ietf-ppm-l1-bound-sum/pull/16",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "martinthomson",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Otherwise, this isn't much use.\r\n\r\nThis is pointed at #15.\r\n\r\nNote that this technically depends on dap-18 being complete, but we don't really depend on anything concrete there, so this doesn't really need to wait.",
       "createdAt": "2026-02-18T05:17:11Z",
-      "updatedAt": "2026-02-19T00:49:13Z",
+      "updatedAt": "2026-02-19T01:51:07Z",
       "baseRepository": "ietf-wg-ppm/draft-ietf-ppm-l1-bound-sum",
       "baseRefName": "main",
       "baseRefOid": "52e79b7080ba0d8cf2f7aabdca5afacded96ef48",
       "headRepository": "ietf-wg-ppm/draft-ietf-ppm-l1-bound-sum",
       "headRefName": "task-encoding",
       "headRefOid": "d0e1b8ce8f405a99d35b6afd696ff35d80c64e00",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-02-19T01:51:07Z",
+      "mergedAt": "2026-02-19T01:51:07Z",
+      "mergedBy": "martinthomson",
+      "mergeCommit": {
+        "oid": "d1fd967ef60dc55fb6e7e108ea6d722ea75f494a"
+      },
       "comments": [],
       "reviews": [
         {
