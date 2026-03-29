@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-22T01:12:28.386540+00:00",
+  "timestamp": "2026-03-29T01:22:48.008133+00:00",
   "repo": "ietf-wg-ppm/draft-ietf-ppm-l1-bound-sum",
   "labels": [
     {
@@ -827,6 +827,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 17,
+      "id": "PR_kwDOM-k-FM7N5InI",
+      "title": "widen `max_measurement` to `uint64`",
+      "url": "https://github.com/ietf-wg-ppm/draft-ietf-ppm-l1-bound-sum/pull/17",
+      "state": "OPEN",
+      "author": "tgeoghegan",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Following the rationale in [1], the `max_measurement` configuration parameter is widened to 64 bits.\r\n\r\n[1]: https://github.com/ietf-wg-ppm/draft-ietf-ppm-dap/pull/777",
+      "createdAt": "2026-03-26T23:57:16Z",
+      "updatedAt": "2026-03-26T23:57:17Z",
+      "baseRepository": "ietf-wg-ppm/draft-ietf-ppm-l1-bound-sum",
+      "baseRefName": "main",
+      "baseRefOid": "d1fd967ef60dc55fb6e7e108ea6d722ea75f494a",
+      "headRepository": "tgeoghegan/draft-ietf-ppm-l1-bound-sum",
+      "headRefName": "vdaf-config-encoding",
+      "headRefOid": "fc52086eae9fa8b10c44fc0a2ba65553e8f16df9",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
