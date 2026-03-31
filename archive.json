@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-29T01:22:48.008133+00:00",
+  "timestamp": "2026-03-31T01:20:50.328143+00:00",
   "repo": "ietf-wg-ppm/draft-ietf-ppm-l1-bound-sum",
   "labels": [
     {
@@ -840,7 +840,7 @@
       "labels": [],
       "body": "Following the rationale in [1], the `max_measurement` configuration parameter is widened to 64 bits.\r\n\r\n[1]: https://github.com/ietf-wg-ppm/draft-ietf-ppm-dap/pull/777",
       "createdAt": "2026-03-26T23:57:16Z",
-      "updatedAt": "2026-03-26T23:57:17Z",
+      "updatedAt": "2026-03-30T19:23:37Z",
       "baseRepository": "ietf-wg-ppm/draft-ietf-ppm-l1-bound-sum",
       "baseRefName": "main",
       "baseRefOid": "d1fd967ef60dc55fb6e7e108ea6d722ea75f494a",
@@ -852,7 +852,21 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOM-k-FM7wX9vq",
+          "commit": {
+            "abbreviatedOid": "fc52086"
+          },
+          "author": "divergentdave",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-03-30T19:23:37Z",
+          "updatedAt": "2026-03-30T19:23:37Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
