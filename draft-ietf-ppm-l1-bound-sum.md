@@ -264,13 +264,13 @@ using the syntax definitions from {{Section 3 of !RFC8446}}.
 ~~~ tls-presentation
 struct {
   uint32 length;
-  uint32 max_value;
+  uint64 max_value;
   uint32 chunk_length;
 } Prio3L1BoundSumConfig;
 ~~~
 {: #fig-config title="VDAF Configuration Encoding for Prio3L1BoundSum"}
 
-This configuration is three 32-bit integers,
+This configuration is three integers,
 each in network byte order,
 with semantics described in {{def}},
 as follows:
