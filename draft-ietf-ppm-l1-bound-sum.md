@@ -156,7 +156,7 @@ def encode(self, measurement: list[int]) -> list[F]:
 
 The encoded measurement has a total length of `(length + 1) * bits`.
 
-The encoding function `encode_range_checked_int`
+The encoding function `encode_range_checked_int()`
 is described in {{Section 7.4.2 of VDAF}}.
 
 The encoded information is not included in the output share
@@ -203,12 +203,11 @@ except that one additional value is checked.
 
 The validity circuit then checks whether the added L1 norm value
 is consistent with the encoded vector elements.
-The L1 norm is checked by decoding the measurement values,
-including the L1 norm.
-The decoded values are used to recompute the L1 norm
-as the sum of the individual components.
-The difference between reported and computed values
-is checked to confirm that the values are identical.
+The L1 norm is checked by decoding the bit decomposition
+of both the measurement values and the L1 norm.
+The sum of the decoded measurement values
+is compared with the reported L1 norm
+to confirm that the values are identical.
 
 The complete circuit is specified in {{fig-eval}}.
 
