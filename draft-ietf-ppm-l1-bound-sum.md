@@ -273,20 +273,23 @@ struct {
 This configuration is three integers,
 each in network byte order,
 with semantics described in {{def}},
-as follows:
+in the following order:
 
 length:
 
-: The total number of values in each measurement.
+: A 32-bit value
+  representing the total number of values in each measurement.
 
 max_value:
 
-: The maximum value, inclusive,
-  for the sum of all measurement values.
+: A 64-bit value
+  representing the maximum value, inclusive,
+  for the sum of all measurement values (the L1 norm).
 
 chunk_length:
 
-: The size of each chunk used in the evaluation circuit;
+: A 32-bit value
+  representing the size of each chunk used in the evaluation circuit;
   see {{fig-eval}}.
 
 
