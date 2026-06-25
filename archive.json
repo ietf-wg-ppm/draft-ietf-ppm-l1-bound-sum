@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-04-30T01:57:33.681709+00:00",
+  "timestamp": "2026-06-25T02:11:11.617397+00:00",
   "repo": "ietf-wg-ppm/draft-ietf-ppm-l1-bound-sum",
   "labels": [
     {
@@ -881,6 +881,86 @@
           "body": "",
           "createdAt": "2026-03-30T19:23:37Z",
           "updatedAt": "2026-03-30T19:23:37Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "id": "PR_kwDOM-k-FM7p8eR_",
+      "title": "Revise the descriptions",
+      "url": "https://github.com/ietf-wg-ppm/draft-ietf-ppm-l1-bound-sum/pull/18",
+      "state": "OPEN",
+      "author": "martinthomson",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Hopefully to make these a little clearer.",
+      "createdAt": "2026-06-24T04:32:06Z",
+      "updatedAt": "2026-06-24T18:03:35Z",
+      "baseRepository": "ietf-wg-ppm/draft-ietf-ppm-l1-bound-sum",
+      "baseRefName": "main",
+      "baseRefOid": "dd9860656d50340987a30dbfaec1a91de216963e",
+      "headRepository": "ietf-wg-ppm/draft-ietf-ppm-l1-bound-sum",
+      "headRefName": "tweak-descriptions",
+      "headRefOid": "6e6ef90d52cb6051a6320bf313e6832dec295a3d",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOM-k-FM8AAAABEBQmnA",
+          "commit": {
+            "abbreviatedOid": "6e6ef90"
+          },
+          "author": "divergentdave",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-06-24T18:03:34Z",
+          "updatedAt": "2026-06-24T18:03:34Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "id": "PR_kwDOM-k-FM7p8g0h",
+      "title": "Describe the config values more clearly",
+      "url": "https://github.com/ietf-wg-ppm/draft-ietf-ppm-l1-bound-sum/pull/19",
+      "state": "OPEN",
+      "author": "martinthomson",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "So the picture isn't load-bearing as much.",
+      "createdAt": "2026-06-24T04:35:13Z",
+      "updatedAt": "2026-06-24T18:04:53Z",
+      "baseRepository": "ietf-wg-ppm/draft-ietf-ppm-l1-bound-sum",
+      "baseRefName": "main",
+      "baseRefOid": "dd9860656d50340987a30dbfaec1a91de216963e",
+      "headRepository": "ietf-wg-ppm/draft-ietf-ppm-l1-bound-sum",
+      "headRefName": "bit-size-config",
+      "headRefOid": "07af7cb65d4a102c96610cac295d2373129b5d98",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOM-k-FM8AAAABEBRV4Q",
+          "commit": {
+            "abbreviatedOid": "07af7cb"
+          },
+          "author": "divergentdave",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-06-24T18:04:53Z",
+          "updatedAt": "2026-06-24T18:04:53Z",
           "comments": []
         }
       ]
