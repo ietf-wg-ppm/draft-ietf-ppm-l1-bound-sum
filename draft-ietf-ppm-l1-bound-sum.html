@@ -1337,7 +1337,7 @@ def encode(self, measurement: list[int]) -&gt; list[F]:
 </pre><a href="#section-3.2-2" class="pilcrow">¶</a>
 </div>
 <p id="section-3.2-3">The encoded measurement has a total length of <code>(length + 1) * bits</code>.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
-<p id="section-3.2-4">The encoding function <code>encode_range_checked_int</code>
+<p id="section-3.2-4">The encoding function <code>encode_range_checked_int()</code>
 is described in <span><a href="https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-vdaf-20#section-7.4.2" class="relref">Section 7.4.2</a> of [<a href="#VDAF" class="cite xref">VDAF</a>]</span>.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
 <p id="section-3.2-5">The encoded information is not included in the output share
 that is submitted for aggregation.
@@ -1384,12 +1384,11 @@ This process is identical to the Prio3SumVec check,
 except that one additional value is checked.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
 <p id="section-3.3-3">The validity circuit then checks whether the added L1 norm value
 is consistent with the encoded vector elements.
-The L1 norm is checked by decoding the measurement values,
-including the L1 norm.
-The decoded values are used to recompute the L1 norm
-as the sum of the individual components.
-The difference between reported and computed values
-is checked to confirm that the values are identical.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
+The L1 norm is checked by decoding the bit decomposition
+of both the measurement values and the L1 norm.
+The sum of the decoded measurement values
+is compared with the reported L1 norm
+to confirm that the values are identical.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
 <p id="section-3.3-4">The complete circuit is specified in <a href="#fig-eval" class="auto internal xref">Figure 1</a>.<a href="#section-3.3-4" class="pilcrow">¶</a></p>
 <span id="name-evaluation-function-for-pri"></span><div id="fig-eval">
 <figure id="figure-1">
