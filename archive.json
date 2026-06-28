@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-06-25T02:11:11.617397+00:00",
+  "timestamp": "2026-06-28T02:29:46.525479+00:00",
   "repo": "ietf-wg-ppm/draft-ietf-ppm-l1-bound-sum",
   "labels": [
     {
@@ -890,24 +890,26 @@
       "id": "PR_kwDOM-k-FM7p8eR_",
       "title": "Revise the descriptions",
       "url": "https://github.com/ietf-wg-ppm/draft-ietf-ppm-l1-bound-sum/pull/18",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "martinthomson",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Hopefully to make these a little clearer.",
       "createdAt": "2026-06-24T04:32:06Z",
-      "updatedAt": "2026-06-24T18:03:35Z",
+      "updatedAt": "2026-06-25T08:00:34Z",
       "baseRepository": "ietf-wg-ppm/draft-ietf-ppm-l1-bound-sum",
       "baseRefName": "main",
       "baseRefOid": "dd9860656d50340987a30dbfaec1a91de216963e",
       "headRepository": "ietf-wg-ppm/draft-ietf-ppm-l1-bound-sum",
       "headRefName": "tweak-descriptions",
       "headRefOid": "6e6ef90d52cb6051a6320bf313e6832dec295a3d",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-06-25T08:00:34Z",
+      "mergedAt": "2026-06-25T08:00:34Z",
+      "mergedBy": "martinthomson",
+      "mergeCommit": {
+        "oid": "6d1b60b817c96a670f2b896d9d5058a5e8c46fe3"
+      },
       "comments": [],
       "reviews": [
         {
@@ -930,24 +932,26 @@
       "id": "PR_kwDOM-k-FM7p8g0h",
       "title": "Describe the config values more clearly",
       "url": "https://github.com/ietf-wg-ppm/draft-ietf-ppm-l1-bound-sum/pull/19",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "martinthomson",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "So the picture isn't load-bearing as much.",
       "createdAt": "2026-06-24T04:35:13Z",
-      "updatedAt": "2026-06-24T18:04:53Z",
+      "updatedAt": "2026-06-25T08:00:32Z",
       "baseRepository": "ietf-wg-ppm/draft-ietf-ppm-l1-bound-sum",
       "baseRefName": "main",
       "baseRefOid": "dd9860656d50340987a30dbfaec1a91de216963e",
       "headRepository": "ietf-wg-ppm/draft-ietf-ppm-l1-bound-sum",
       "headRefName": "bit-size-config",
       "headRefOid": "07af7cb65d4a102c96610cac295d2373129b5d98",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-06-25T08:00:32Z",
+      "mergedAt": "2026-06-25T08:00:32Z",
+      "mergedBy": "martinthomson",
+      "mergeCommit": {
+        "oid": "c467fca4c36a1a131cd8d64c9200dbb1276ce0fe"
+      },
       "comments": [],
       "reviews": [
         {
